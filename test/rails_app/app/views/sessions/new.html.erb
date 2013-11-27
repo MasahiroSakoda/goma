@@ -1,0 +1,19 @@
+<h1>Login</h1>
+<%= form_tag session_path do %>
+  <div class="field">
+    <%= label_tag :username_or_email %><br />
+    <%= text_field_tag :username_or_email %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password %>
+  </div>
+  <div class="field">
+    <%= label_tag :remember_me %><br />
+    <%= check_box_tag :remember_me %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Login" %>
+  </div>
+<% end %>
+

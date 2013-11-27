@@ -1,67 +1,97 @@
+GIT
+  remote: git://github.com/kentaroi/uninclude.git
+  revision: f9c79125de5f82cf037031bb2a83de733a716562
+  branch: make_compatible_with_2.1.1_spike
+  specs:
+    uninclude (1.0.1)
+
 PATH
   remote: .
   specs:
-    goma (0.0.1)
+    goma (0.0.1.alpha)
       rails (~> 4.0.1)
+      warden
 
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.0.1)
-      actionpack (= 4.0.1)
+    actionmailer (4.0.4)
+      actionpack (= 4.0.4)
       mail (~> 2.5.4)
-    actionpack (4.0.1)
-      activesupport (= 4.0.1)
+    actionpack (4.0.4)
+      activesupport (= 4.0.4)
       builder (~> 3.1.0)
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    activemodel (4.0.1)
-      activesupport (= 4.0.1)
+    activemodel (4.0.4)
+      activesupport (= 4.0.4)
       builder (~> 3.1.0)
-    activerecord (4.0.1)
-      activemodel (= 4.0.1)
+    activerecord (4.0.4)
+      activemodel (= 4.0.4)
       activerecord-deprecated_finders (~> 1.0.2)
-      activesupport (= 4.0.1)
+      activesupport (= 4.0.4)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
-    activesupport (4.0.1)
-      i18n (~> 0.6, >= 0.6.4)
+    activesupport (4.0.4)
+      i18n (~> 0.6, >= 0.6.9)
       minitest (~> 4.2)
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    arel (4.0.1)
-    atomic (1.1.14)
+    ansi (1.4.3)
+    arel (4.0.2)
+    bcrypt (3.1.7)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
     builder (3.1.4)
+    byebug (3.1.2)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+    columnize (0.8.9)
+    debugger-linecache (1.2.0)
     erubis (2.7.0)
+    fabrication (2.11.1)
+    hashie (2.1.1)
     hike (1.2.3)
-    i18n (0.6.5)
+    i18n (0.6.9)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.4)
     mime-types (1.25.1)
     minitest (4.7.5)
-    multi_json (1.8.2)
-    polyglot (0.3.3)
+    minitest-ansi (0.1.3)
+      ansi (~> 1.3)
+      minitest (>= 2.5, < 5.0)
+    mocha (1.0.0)
+      metaclass (~> 0.0.1)
+    multi_json (1.9.3)
+    omniauth (1.2.1)
+      hashie (>= 1.2, < 3)
+      rack (~> 1.0)
+    polyglot (0.3.4)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (4.0.1)
-      actionmailer (= 4.0.1)
-      actionpack (= 4.0.1)
-      activerecord (= 4.0.1)
-      activesupport (= 4.0.1)
+    rails (4.0.4)
+      actionmailer (= 4.0.4)
+      actionpack (= 4.0.4)
+      activerecord (= 4.0.4)
+      activesupport (= 4.0.4)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.0.1)
+      railties (= 4.0.4)
       sprockets-rails (~> 2.0.0)
-    railties (4.0.1)
-      actionpack (= 4.0.1)
-      activesupport (= 4.0.1)
+    railties (4.0.4)
+      actionpack (= 4.0.4)
+      activesupport (= 4.0.4)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.1.0)
-    sprockets (2.10.1)
+    rake (10.3.1)
+    shoulda-context (1.2.1)
+    single_test (0.6.0)
+      rake
+    sprockets (2.12.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -70,19 +100,31 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sqlite3 (1.3.8)
-    thor (0.18.1)
-    thread_safe (0.1.3)
-      atomic
+    sqlite3 (1.3.9)
+    thor (0.19.1)
+    thread_safe (0.3.3)
     tilt (1.4.1)
+    timecop (0.7.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
+    warden (1.2.3)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby
+  byebug
+  fabrication
   goma!
+  minitest-ansi
+  mocha
+  omniauth
+  shoulda-context
+  single_test
   sqlite3
+  timecop
+  uninclude!

@@ -7,16 +7,25 @@ require "goma/version"
 Gem::Specification.new do |s|
   s.name        = "goma"
   s.version     = Goma::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Goma."
-  s.description = "TODO: Description of Goma."
+  s.authors     = ["Kentaro Imai"]
+  s.email       = ["kentaroi@gmail.com"]
+  s.homepage    = "https://github.com/kentaroi/goma"
+  s.summary     = "An authentication solution for Rails 4"
+  s.description = "An authentication solution for Rails 4"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.0.1"
+  s.add_dependency "warden"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "bcrypt-ruby"
+  s.add_development_dependency "fabrication"
+  s.add_development_dependency "mocha"
+  s.add_development_dependency "shoulda-context"
+  s.add_development_dependency "timecop"
+  s.add_development_dependency "minitest-ansi"
+  s.add_development_dependency "single_test"
+  s.add_development_dependency "byebug"
 end
