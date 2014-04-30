@@ -39,14 +39,14 @@ module Goma
 
       def remember_cookie_value(record)
         {httponly: true}.
-          merge( forget_cookie_values(record) ).
-          merge( value:   record.serialize_into_cookie,
-                 expires: record.remember_expires_at)
+          merge!( forget_cookie_values(record) ).
+          merge!( value:   record.serialize_into_cookie,
+                  expires: record.remember_expires_at)
       end
 
       def forget_cookie_values(record)
         Rails.configuration.session_options.slice(:path, :domain, :secure).
-          merge(record.goma_config.rememberable_options)
+          merge!(record.goma_config.rememberable_options)
       end
     end
   end
