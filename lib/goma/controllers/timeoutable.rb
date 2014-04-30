@@ -73,7 +73,7 @@ module Goma
         def require_#{scope}_login
           #{Goma.config.validate_session_even_in_not_login_area ? '' : "validate_session_for(:#{scope})" }
           if _goma_error[:#{scope}] == :timeout
-            #{config.logout_all_scopes ? 'logout_all_scopes' : "logout(:#{scope})"}
+            #{config.logout_all_scopes ? 'logout_all_scopes(timeout: true)' : "logout(:#{scope}, timeout: true)"}
           end
           super
         end

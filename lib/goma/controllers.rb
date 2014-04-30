@@ -31,7 +31,7 @@ module Goma
       def current_#{scope}
         warden.authenticate(scope: :#{scope})
       rescue Goma::NotFound
-        #{scope}_logout
+        logout(:#{scope})
         nil
       end
 
@@ -70,7 +70,7 @@ module Goma
       warden.set_user(record, scope: record.goma_scope)
     end
 
-    def logout(arg=nil)
+    def logout(arg=nil, *)
       scope = case arg
               when Symbol
                 arg
@@ -83,8 +83,8 @@ module Goma
       instance_variable_set("@current_#{scope}", nil)
     end
 
-    def logout_all_scopes
-      Goma.config.scopes.each { |scope| logout(scope) }
+    def logout_all_scopes(timeout: false)
+      Goma.config.scopes.each { |scope| logout(scope, timeout: timeout) }
     end
 
     def redirect_back_or_to(url, flash_hash={})

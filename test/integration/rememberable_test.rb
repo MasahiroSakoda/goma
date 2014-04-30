@@ -77,4 +77,19 @@ class RememberableTest < ActionDispatch::IntegrationTest
       assert_response :success
     end
   end
+
+  test  'should forget when logout' do
+    swap ApplicationController, allow_forgery_protection: true do
+      get 'session/new'
+      post 'session', username_or_email: @user.email, password: 'secret', remember_me: '1', authenticity_token: session['_csrf_token']
+      assert @user, request.env['warden'].user(:user)
+
+      delete 'session', authenticity_token: session['_csrf_token']
+      refute request.env['warden'].user(:user)
+
+      get 'secret/index'
+      assert_redirected_to root_url
+      refute request.env['warden'].user(:user)
+    end
+  end
 end
