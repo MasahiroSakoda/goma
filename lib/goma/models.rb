@@ -2,7 +2,13 @@ module Goma
   module Models
     extend ActiveSupport::Concern
 
+    # @!parse extend ClassMethods
     module ClassMethods
+      # Include {Goma::Models::Authenticatable} and other modules
+      # specified in config/initializers/goma.rb file.
+      #
+      # @param [Symbol] goma_scope If goma_scope is omitted, Goma assumes
+      #                            scope by the class name and configuration.
       def goma(goma_scope=nil)
         @goma_scope = goma_scope if goma_scope
         require 'goma/models/authenticatable'

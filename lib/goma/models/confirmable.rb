@@ -12,6 +12,7 @@ module Goma
         after_update  :send_email_confirmation_needed_email, if: :send_email_confirmation_needed_email?
       end
 
+      # @!parse extend ClassMethods
       module ClassMethods
         DefinitionHelper.define_load_from_token_with_error_method_for(self, :confirmation)
 
@@ -44,6 +45,8 @@ module Goma
         !!self.send(goma_config.activated_at_getter)
       end
 
+      # Usually, this method should be called after user is loaded by
+      # {ClassMethods#load_from_activation_token_with_error}.
       def activate!
         self.send(goma_config.activated_at_setter, Time.new.utc)
         self.send(goma_config.confirmation_token_setter, nil)
@@ -52,6 +55,8 @@ module Goma
         send_activation_success_email if send_activation_success_email?
       end
 
+      # Usually, this method should be called after user is loaded by
+      # {ClassMethods#load_from_email_confirmation_token_with_error}.
       def confirm_email!
         @skip_email_confirmation = true
         self.send(goma_config.email_setter, self.send(goma_config.unconfirmed_email_getter))

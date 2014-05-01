@@ -1,7 +1,9 @@
 module Goma
   class << self
     attr_accessor :encryptor, :token_generator
-    # TODO Where is the best place?
+
+    # Constant time comparison to prevent timing attacks
+    # {https://github.com/plataformatec/devise/blob/master/lib/devise.rb#L483}
     def secure_compare(a, b)
      return false if a.blank? || b.blank? || a.bytesize != b.bytesize
      l = a.unpack "C#{a.bytesize}"
@@ -11,6 +13,9 @@ module Goma
      res == 0
     end
 
+
+    # @param [Symbol] scope
+    # @return [Class] Class for the scope
     def incarnate(scope)
      @models ||= {}
      @models[scope] ||= scope.to_s.classify.constantize

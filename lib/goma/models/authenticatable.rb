@@ -12,6 +12,7 @@ module Goma
           METHOD
         end
 
+        # @return [Symbol] Scope for this model
         def goma_scope
           @goma_scope ||= begin
                             _goma_scope = name.underscore.to_sym
@@ -25,10 +26,14 @@ module Goma
                           end
         end
 
+        # @return [Goma::Configuration] Config for this model
         def goma_config
           @goma_config ||= Goma.config_for[self.goma_scope] || Goma.config
         end
 
+        # You don't have to call this method directly.
+        # This method is called from the modules defined under {Goma::Models}
+        # @return [Object, Symbol] Object load from the token and nil or, if it failed, nil and a symbol which indicates reason
         def load_from_token_with_error(raw_token, token_attr, token_sent_at_attr, valid_period)
           token = Goma.token_generator.digest(token_attr, raw_token)
           if record = self.find_by(token_attr => token)
@@ -53,10 +58,12 @@ module Goma
         METHOD
       end
 
+      # @return [Goma::Configuration] Config for this object
       def goma_config
         self.class.goma_config
       end
 
+      # @return [Symbol] scope for this object
       def goma_scope
         self.class.goma_scope
       end
