@@ -14,7 +14,7 @@ module Goma
         include Goma::Generators::Helpers::OrmHelpers
         include Goma::Generators::Helpers::ActiveRecordHelpers
         include Goma::Generators::Model::Common
-        source_root File.expand_path('../../templates', __FILE__)
+        source_root File.expand_path('../templates', __FILE__)
 
         def copy_goma_migration
           super
