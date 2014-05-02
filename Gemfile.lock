@@ -9,7 +9,7 @@ PATH
   remote: .
   specs:
     goma (0.0.1.alpha)
-      rails (~> 4.0.1)
+      rails (~> 4.0)
       warden
 
 GEM
