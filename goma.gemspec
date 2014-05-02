@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "warden"
 
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "bcrypt-ruby"
+  s.add_development_dependency "bcrypt", "~> 3.0"
   s.add_development_dependency "fabrication"
   s.add_development_dependency "mocha"
   s.add_development_dependency "shoulda-context"
