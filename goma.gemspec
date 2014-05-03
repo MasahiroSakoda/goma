@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/kentaroi/goma"
   s.summary     = "An authentication solution for Rails 4"
   s.description = "An authentication solution for Rails 4"
+  s.licenses    = ["MIT"]
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
