@@ -1,0 +1,27 @@
+<h1>Login</h1>
+
+<%%= form_tag(<%= name.underscore.pluralize %>_url, method: :post) do %>
+  <div class="field">
+    <%%= label_tag :<%= goma_config.authentication_keys.join('_or_') %> %><br>
+    <%%= text_field_tag :identifier %>
+  </div>
+  <div class="field">
+    <%%= label_tag :<%= goma_config.password_attribute_name %> %><br>
+    <%%= password_field_tag :<%= goma_config.password_attribute_name %> %>
+  </div>
+<% if goma_config.modules.include?(:rememberable) %>
+  <div class="field">
+    <%%= check_box_tag :remember_me %> <%%= label_tag :remember_me %>
+  </div>
+<% end %>
+  <div class="actions">
+    <%%= submit_tag "Login" %>
+  </div>
+<%% end %>
+<% if goma_config.modules.include?(:omniauthable) %>
+<%% if Rails.env.in? %w(development test) %>
+  <%%= link_to 'Sign in with Developer', '/auth/developer' %>
+<%% end %>
+<%%#= link_to 'Sign in with Twitter', '/auth/twitter' %>
+<%%#= link_to 'Sign in with Facebook', '/auth/facebook' %>
+<% end %>

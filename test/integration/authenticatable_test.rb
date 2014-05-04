@@ -16,4 +16,11 @@ class AuthenticatableSessionTest < ActionDispatch::IntegrationTest
     post 'session', username_or_email: @user.email, password: 'secret'
     assert_redirected_to secret_index_url
   end
+
+  test 'should redirect back url with parameters correctly' do
+    get 'secret/index?page=100'
+    assert_redirected_to root_url
+    post 'session', username_or_email: @user.email, password: 'secret'
+    assert_redirected_to '/secret/index?page=100'
+  end
 end

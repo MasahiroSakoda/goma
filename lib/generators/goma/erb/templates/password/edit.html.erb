@@ -1,0 +1,27 @@
+<h1>Change your password</h1>
+
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <div id="error_explanation">
+      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+
+      <ul>
+      <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+        <li><%%= msg %></li>
+      <%% end %>
+      </ul>
+    </div>
+  <%% end %>
+
+  <div class="field">
+    <%%= f.label :<%= goma_config.password_attribute_name %> %><br>
+    <%%= f.password_field :<%= goma_config.password_attribute_name %> %>
+  </div>
+  <div class="field">
+    <%%= f.label :<%= goma_config.password_attribute_name %>_confirmation %><br>
+    <%%= f.password_field :<%= goma_config.password_attribute_name %>_confirmation %>
+  </div>
+  <div class="actions">
+    <%%= f.submit %>
+  </div>
+<%% end %>

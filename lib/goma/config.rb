@@ -40,7 +40,7 @@ module Goma
 
   class Configuration
     include Goma::Configurable
-    config_accessor(:default_mailer_name)                          { nil }
+    config_accessor(:default_mailer_name)                          { 'UserMailer' }
     config_accessor(:mailer_sender)
     config_accessor(:authentication_keys)                          { [:email] }
     config_accessor(:email_regexp)                                 { /\A[^@]+@[^@]+\z/ }

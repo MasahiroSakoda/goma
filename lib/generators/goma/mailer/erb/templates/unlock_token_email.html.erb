@@ -1,0 +1,8 @@
+<p>Hello, <%%= @<%= resource_name %>.<%= goma_config.email_attribute_name %> %></p>
+
+<p>Your account has been locked due to an excessive number of unsuccessful login attempts.</p>
+
+<p>Click the link below to unlock your account:</p>
+
+<p><%%= link_to 'Unlock my account', unlock_url(@<%= resource_name %>.<%= goma_config.unlock_token_to_send_attribute_name %>) %></p>
+

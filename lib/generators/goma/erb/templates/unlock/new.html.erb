@@ -1,0 +1,11 @@
+<h1>Resend unlock instructions</h1>
+
+<%%= form_tag(<%= name.underscore.pluralize%>_url, method: :post) do %>
+  <div class="field">
+    <%%= label_tag :<%= goma_config.authentication_keys.join('_') %> %><br>
+    <%%= text_field_tag :identifier %>
+  </div>
+  <div class="actions">
+    <%%= submit_tag "Resend unlock instructions" %>
+  </div>
+<%% end %>
