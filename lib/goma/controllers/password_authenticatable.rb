@@ -15,22 +15,9 @@ module Goma
         RUBY
       end
 
-      def filtered_hash(scope, identifier)
-        hash = {}
-        config = Goma.config_for[scope] || Goma.config
-        config.authentication_keys.each do |key|
-          value = identifier.dup
-          value.downcase! if key.in? config.case_insensitive_keys
-          value.strip! if key.in? config.strip_whitespace_keys
-          hash[key] = value
-        end
-        hash
-      end
-
       def login(identifier, password, remember_me=false, scope: Goma.config.default_scope)
-        for key, value in filtered_hash(scope, identifier)
-          break if record = Goma.incarnate(scope).find_by(key => value)
-        end
+        record = Goma.incarnate(scope).find_by_identifier(identifier)
+
         _goma_error[scope] = :invalid_id_or_password and return unless record
 
         if record.valid_password?(password)

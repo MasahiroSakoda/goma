@@ -25,6 +25,23 @@ module Goma
       end
 
       module ClassMethods
+        def find_by_identifier(identifier)
+          for key, value in filtered_hash(identifier)
+            break if record = find_by(key => value)
+          end
+          record
+        end
+
+        def filtered_hash(identifier)
+          hash = {}
+          goma_config.authentication_keys.each do |key|
+            value = identifier.dup
+            value.downcase! if key.in? goma_config.case_insensitive_keys
+            value.strip! if key.in? goma_config.strip_whitespace_keys
+            hash[key] = value
+          end
+          hash
+        end
       end
 
       def valid_password?(password)
