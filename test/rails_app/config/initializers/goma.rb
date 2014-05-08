@@ -27,15 +27,11 @@ Goma.configure do |config|
   # config.confirmation_keys = [ :email ]
   # config.allow_unconfirmed_access_for = 0
   # config.activate_within = 3.days
-  # config.send_activation_needed_email = true
   # config.activation_needed_email_method_name = :activation_needed_email
-  # config.send_activation_success_email = true
   # config.activation_success_email_method_name = :activation_success_email
   # config.email_confirmation_enabled = true
   # config.confirm_email_within = 3.days
-  # config.send_email_confirmation_needed_email = true
   # config.email_confirmation_needed_email_method_name = :email_confirmation_needed_email
-  # config.send_email_confirmation_success_email = true
   # config.email_confirmation_success_email_method_name = :email_confirmation_success_email
   # config.confirmation_token_attribute_name = :perishable_token
   # config.confirmation_token_sent_at_attribute_name = :perishable_token_sent_at

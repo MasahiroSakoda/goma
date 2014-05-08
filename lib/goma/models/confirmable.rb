@@ -79,19 +79,19 @@ module Goma
       end
 
       def send_activation_needed_email?
-        goma_config.send_activation_needed_email && !@skip_activation_needed_email
+        goma_config.activation_needed_email_method_name && !@skip_activation_needed_email
       end
 
       def send_activation_success_email?
-        goma_config.send_activation_success_email && !@skip_activation_success_email
+        goma_config.activation_success_email_method_name && !@skip_activation_success_email
       end
 
       def send_email_confirmation_needed_email?
-        @email_confirmation_setup && goma_config.send_email_confirmation_needed_email && !@skip_email_confirmation_needed_email
+        @email_confirmation_setup && goma_config.email_confirmation_needed_email_method_name && !@skip_email_confirmation_needed_email
       end
 
       def send_email_confirmation_success_email?
-        goma_config.send_email_confiramtion_success_email && !@skip_email_confirmation_success_email
+        goma_config.email_confirmation_success_email_method_name && !@skip_email_confirmation_success_email
       end
 
       DefinitionHelper.define_token_generator_method_for(self, :confirmation)

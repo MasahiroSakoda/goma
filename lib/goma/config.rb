@@ -69,15 +69,11 @@ module Goma
     config_accessor(:confirmation_keys)                            { [ :email ] }
     config_accessor(:allow_unactivated_access_for)                 { 0 }
     config_accessor(:activate_within)                              { 3.days }
-    config_accessor(:send_activation_needed_email)                 { true }
     config_accessor(:activation_needed_email_method_name)          { :activation_needed_email }
-    config_accessor(:send_activation_success_email)                { true }
     config_accessor(:activation_success_email_method_name)         { :activation_success_email }
     config_accessor(:email_confirmation_enabled)                   { true }
     config_accessor(:confirm_email_within)                         { 3.days }
-    config_accessor(:send_email_confirmation_needed_email)         { true }
     config_accessor(:email_confirmation_needed_email_method_name)  { :email_confirmation_needed_email }
-    config_accessor(:send_email_confirmation_success_email)        { true }
     config_accessor(:email_confirmation_success_email_method_name) { :email_confirmation_success_email }
     config_accessor(:confirmation_token_attribute_name)            { :confirmation_token }
     config_accessor(:confirmation_token_sent_at_attribute_name)    { :confirmation_token_sent_at }
