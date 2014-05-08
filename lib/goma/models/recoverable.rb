@@ -3,12 +3,14 @@ module Goma
     module Recoverable
       extend ActiveSupport::Concern
 
+      included do
+        attr_accessor goma_config.reset_password_token_to_send_attribute_name
+      end
+
       module ClassMethods
         DefinitionHelper.define_load_from_token_with_error_method_for(self, :reset_password)
         DefinitionHelper.define_load_from_token_methods_for(self, :reset_password)
       end
-
-      attr_accessor :raw_reset_password_token
 
       def send_reset_password_instructions!
         generate_reset_password_token

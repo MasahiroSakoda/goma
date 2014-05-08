@@ -5,12 +5,15 @@ module Goma
     module Lockable
       extend ActiveSupport::Concern
 
+      included do
+        attr_accessor goma_config.unlock_token_to_send_attribute_name
+      end
+
       module ClassMethods
         DefinitionHelper.define_load_from_token_with_error_method_for(self, :unlock)
         DefinitionHelper.define_load_from_token_methods_for(self, :unlock)
       end
 
-      attr_accessor :raw_unlock_token
 
       def send_unlock_instructions!
         generate_unlock_token

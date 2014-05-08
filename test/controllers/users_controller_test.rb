@@ -14,7 +14,7 @@ class UsersControllerTest < ActionController::TestCase
     user = User.new(username: 'foo', email: 'foo@example.com', password: 'secret', password_confirmation: 'secret')
     user.save!
 
-    get :activate, id: user.raw_activation_token
+    get :activate, id: user.raw_confirmation_token
     assert_redirected_to root_url
     assert flash[:notice]
     user.reload

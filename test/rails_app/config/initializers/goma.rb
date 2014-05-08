@@ -33,8 +33,9 @@ Goma.configure do |config|
   # config.confirm_email_within = 3.days
   # config.email_confirmation_needed_email_method_name = :email_confirmation_needed_email
   # config.email_confirmation_success_email_method_name = :email_confirmation_success_email
-  # config.confirmation_token_attribute_name = :perishable_token
-  # config.confirmation_token_sent_at_attribute_name = :perishable_token_sent_at
+  # config.confirmation_token_attribute_name = :confirmation_token
+  # config.confirmation_token_sent_at_attribute_name = :confirmation_token_sent_at
+  # config.confirmation_token_to_send_attribute_name = :raw_confirmation_token
   # config.activated_at_attribute_name = :activated_at
   # config.unconfirmed_email_attribute_name = :unconfirmed_email
   # config.email_confirmed_at_attribute_name = nil
@@ -63,6 +64,7 @@ Goma.configure do |config|
   # config.last_attempt_warning = false
   # config.unlock_token_attribute_name = :unlock_token
   # config.unlock_token_sent_at_attribute_name = :unlock_token_sent_at
+  # config.unlock_token_to_send_attribute_name = :raw_unlock_token
 
   ####################################################
   # Recoverable
@@ -71,6 +73,7 @@ Goma.configure do |config|
   # config.reset_password_within = 6.hours
   # config.reset_password_token_attribute_name = :reset_password_token
   # config.reset_password_token_sent_at_attribute_name = :reset_password_token_sent_at
+  # config.reset_password_token_to_send_attribute_name = :raw_reset_password_token
 
   ####################################################
   # Omniauthable

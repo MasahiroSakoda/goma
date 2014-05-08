@@ -107,7 +107,7 @@ module Goma
         target.module_eval <<-METHOD, __FILE__, __LINE__ + 1
         def generate_#{purpose}_token
           raw, enc = Goma.token_generator.generate(self.class, goma_config.#{purpose}_token_attribute_name)
-          @raw_#{purpose}_token = raw
+          self.send(goma_config.#{purpose}_token_to_send_setter, raw)
           self.send(goma_config.#{purpose}_token_setter, enc)
           self.send(goma_config.#{purpose}_token_sent_at_setter, Time.now.utc)
         end

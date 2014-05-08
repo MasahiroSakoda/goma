@@ -25,7 +25,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "load user record with correct activation token" do
-      raw_token = @user.raw_activation_token
+      raw_token = @user.raw_confirmation_token
       loaded_user = User.load_from_activation_token!(raw_token)
       assert_equal @user.id, loaded_user.id
     end
@@ -37,7 +37,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "raise exception with correct activation token which is expired" do
-      raw_token = @user.raw_activation_token
+      raw_token = @user.raw_confirmation_token
       @user.update_attribute(:confirmation_token_sent_at, 7.days.ago)
 
       assert_raise Goma::TokenExpired do
@@ -52,7 +52,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "return user record and nil with correct activation token" do
-      raw_token = @user.raw_activation_token
+      raw_token = @user.raw_confirmation_token
       loaded_user, error = User.load_from_activation_token_with_error(raw_token)
       assert_equal @user.id, loaded_user.id
       assert_nil error
@@ -65,7 +65,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "return nil and :token_expired with correct activation token which is expired" do
-      raw_token = @user.raw_activation_token
+      raw_token = @user.raw_confirmation_token
       @user.update_attribute(:confirmation_token_sent_at, 7.days.ago)
 
       loaded_user, error = User.load_from_activation_token_with_error(raw_token)
@@ -80,7 +80,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "return user record with correct activation token" do
-      raw_token = @user.raw_activation_token
+      raw_token = @user.raw_confirmation_token
       loaded_user = User.load_from_activation_token(raw_token)
       assert_equal @user.id, loaded_user.id
     end
@@ -91,7 +91,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "return nil with correct activation token which is expired" do
-      raw_token = @user.raw_activation_token
+      raw_token = @user.raw_confirmation_token
       @user.update_attribute(:confirmation_token_sent_at, 7.days.ago)
 
       loaded_user = User.load_from_activation_token(raw_token)
@@ -146,7 +146,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "find user record with correct email confirmation token" do
-      raw_token = @user.raw_email_confirmation_token
+      raw_token = @user.raw_confirmation_token
       loaded_user = User.load_from_email_confirmation_token!(raw_token)
       assert_equal @user.id, loaded_user.id
     end
@@ -158,7 +158,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "not find user record with correct confirmation token which is expired" do
-      raw_token = @user.raw_email_confirmation_token
+      raw_token = @user.raw_confirmation_token
       @user.update_attribute(:confirmation_token_sent_at, 7.days.ago)
 
       assert_raise Goma::TokenExpired do
@@ -175,7 +175,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "return user record and nil with correct email_confirmation token" do
-      raw_token = @user.raw_email_confirmation_token
+      raw_token = @user.raw_confirmation_token
       loaded_user, error = User.load_from_email_confirmation_token_with_error(raw_token)
       assert_equal @user.id, loaded_user.id
       assert_nil error
@@ -188,7 +188,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "return nil and :token_expired with correct email_confirmation token which is expired" do
-      raw_token = @user.raw_email_confirmation_token
+      raw_token = @user.raw_confirmation_token
       @user.update_attribute(:confirmation_token_sent_at, 7.days.ago)
 
       loaded_user, error = User.load_from_email_confirmation_token_with_error(raw_token)
@@ -205,7 +205,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "return user record with correct email_confirmation token" do
-      raw_token = @user.raw_email_confirmation_token
+      raw_token = @user.raw_confirmation_token
       loaded_user = User.load_from_email_confirmation_token(raw_token)
       assert_equal @user.id, loaded_user.id
     end
@@ -216,7 +216,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     end
 
     should "return nil with correct email_confirmation token which is expired" do
-      raw_token = @user.raw_email_confirmation_token
+      raw_token = @user.raw_confirmation_token
       @user.update_attribute(:confirmation_token_sent_at, 7.days.ago)
 
       loaded_user = User.load_from_email_confirmation_token(raw_token)

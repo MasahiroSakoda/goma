@@ -77,6 +77,7 @@ module Goma
     config_accessor(:email_confirmation_success_email_method_name) { :email_confirmation_success_email }
     config_accessor(:confirmation_token_attribute_name)            { :confirmation_token }
     config_accessor(:confirmation_token_sent_at_attribute_name)    { :confirmation_token_sent_at }
+    config_accessor(:confirmation_token_to_send_attribute_name)    { :raw_confirmation_token }
     config_accessor(:activated_at_attribute_name)                  { :activated_at }
     config_accessor(:unconfirmed_email_attribute_name)             { :unconfirmed_email }
     config_accessor(:email_confirmed_at_attribute_name)            { nil }
@@ -104,6 +105,7 @@ module Goma
     config_accessor(:locked_at_attribute_name)                     { :locked_at }
     config_accessor(:unlock_token_attribute_name)                  { :unlock_token }
     config_accessor(:unlock_token_sent_at_attribute_name)          { :unlock_token_sent_at }
+    config_accessor(:unlock_token_to_send_attribute_name)          { :raw_unlock_token }
     config_accessor(:unlock_in)                                    { 1.hour }
 
     # Recoverable
@@ -113,6 +115,7 @@ module Goma
     config_accessor(:reset_password_within)                        { 6.hours }
     config_accessor(:reset_password_token_attribute_name)          { :reset_password_token }
     config_accessor(:reset_password_token_sent_at_attribute_name)  { :reset_password_token_sent_at }
+    config_accessor(:reset_password_token_to_send_attribute_name)  { :raw_reset_password_token }
 
     # Trackable
     config_accessor(:login_count_attribute_name)                   { :login_count }

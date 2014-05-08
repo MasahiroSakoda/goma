@@ -4,6 +4,8 @@ module Goma
       extend ActiveSupport::Concern
 
       included do
+        attr_accessor goma_config.confirmation_token_to_send_attribute_name
+
         before_create :setup_activation, unless: :activated?
         after_create  :send_activation_needed_email, if: :send_activation_needed_email?
         before_update :setup_email_confirmation, if: :email_confirmation_required?
@@ -24,10 +26,6 @@ module Goma
         DefinitionHelper.define_load_from_token_methods_for(self, :activation)
         DefinitionHelper.define_load_from_token_methods_for(self, :email_confirmation)
       end
-
-      attr_accessor :raw_confirmation_token
-      alias raw_activation_token         raw_confirmation_token
-      alias raw_email_confirmation_token raw_confirmation_token
 
       def initialize(*args)
         super
