@@ -114,10 +114,10 @@ module Goma
         METHOD
       end
 
-      def define_send_email_method_for(target, mailer, name)
+      def define_send_email_method_for(target, mailer_name, name)
         target.module_eval <<-METHOD, __FILE__, __LINE__ + 1
         def send_#{name}
-          mailer = goma_config.#{mailer} || goma_config.default_mailer
+          mailer = (goma_config.#{mailer_name}_mailer_name || goma_config.default_mailer_name).constantize
           mailing_method = goma_config.#{name}_method_name
           mail = mailer.send(mailing_method, self)
           mail.deliver

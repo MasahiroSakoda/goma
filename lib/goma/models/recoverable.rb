@@ -25,7 +25,7 @@ module Goma
       end
 
       DefinitionHelper.define_token_generator_method_for(self, :reset_password)
-      DefinitionHelper.define_send_email_method_for(self, :reset_password_mailer, :reset_password_email)
+      DefinitionHelper.define_send_email_method_for(self, :reset_password, :reset_password_email)
     end
   end
 end

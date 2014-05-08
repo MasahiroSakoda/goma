@@ -19,7 +19,7 @@ module Goma
       end
 
       DefinitionHelper.define_token_generator_method_for(self, :unlock)
-      DefinitionHelper.define_send_email_method_for(self, :unlock_token_mailer, :unlock_token_email)
+      DefinitionHelper.define_send_email_method_for(self, :unlock_token, :unlock_token_email)
 
       def valid_password?(password)
         if super

@@ -1,5 +1,5 @@
 Goma.configure do |config|
-  config.default_mailer = UserMailer
+  config.default_mailer_name = 'UserMailer'
   config.mailer_sender = 'please-change-me-at-config-initializers-goma@example.com'
   config.authentication_keys = [ :username, :email ]
   # config.email_regexp = /\A[^@]+@[^@]+\z/

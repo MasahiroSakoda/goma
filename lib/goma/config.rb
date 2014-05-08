@@ -40,7 +40,7 @@ module Goma
 
   class Configuration
     include Goma::Configurable
-    config_accessor(:default_mailer)                               { nil }
+    config_accessor(:default_mailer_name)                          { nil }
     config_accessor(:mailer_sender)
     config_accessor(:authentication_keys)                          { [:email] }
     config_accessor(:email_regexp)                                 { /\A[^@]+@[^@]+\z/ }
@@ -64,8 +64,8 @@ module Goma
     config_accessor(:encrypted_password_attribute_name)            { :encrypted_password }
 
     # Confirmable
-    config_accessor(:activation_mailer)                            { nil }
-    config_accessor(:email_confirmation_mailer)                    { nil }
+    config_accessor(:activation_mailer_name)                       { nil }
+    config_accessor(:email_confirmation_mailer_name)               { nil }
     config_accessor(:confirmation_keys)                            { [ :email ] }
     config_accessor(:allow_unactivated_access_for)                 { 0 }
     config_accessor(:activate_within)                              { 3.days }
@@ -94,7 +94,7 @@ module Goma
     config_accessor(:validate_session_even_in_not_login_area)      { true }
 
     # Lockable
-    config_accessor(:unlock_token_mailer)                          { nil }
+    config_accessor(:unlock_token_mailer_name)                     { nil }
     config_accessor(:unlock_token_email_method_name)               { :unlock_email }
     config_accessor(:lock_strategy)                                { :failed_attempts }
     config_accessor(:unlock_keys)                                  { :email }
@@ -107,7 +107,7 @@ module Goma
     config_accessor(:unlock_in)                                    { 1.hour }
 
     # Recoverable
-    config_accessor(:reset_password_mailer)                        { nil }
+    config_accessor(:reset_password_mailer_name)                   { nil }
     config_accessor(:reset_password_email_method_name)             { :reset_password_email }
     config_accessor(:reset_password_keys)                          { [ :email ] }
     config_accessor(:reset_password_within)                        { 6.hours }

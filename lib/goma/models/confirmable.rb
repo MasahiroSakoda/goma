@@ -109,11 +109,11 @@ module Goma
         generate_confirmation_token
       end
 
-      {activation_needed_email:          :activation_mailer,
-       activation_success_email:         :activation_mailer,
-       email_confirmation_needed_email:  :email_confirmation_mailer,
-       email_confirmation_success_email: :email_confirmation_mailer}.each do |name, mailer|
-        DefinitionHelper.define_send_email_method_for(self, mailer, name)
+      {activation_needed_email:          :activation,
+       activation_success_email:         :activation,
+       email_confirmation_needed_email:  :email_confirmation,
+       email_confirmation_success_email: :email_confirmation}.each do |name, mailer_name|
+        DefinitionHelper.define_send_email_method_for(self, mailer_name, name)
       end
     end
   end

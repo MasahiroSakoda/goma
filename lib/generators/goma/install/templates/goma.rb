@@ -1,5 +1,5 @@
 Goma.configure do |config|
-  # config.default_mailer =
+  # config.default_mailer_name =
   config.mailer_sender = 'please-change-me-at-config-initializers-goma@example.com'
   # config.authentication_keys = [ :email ]
   # config.email_regexp = /\A[^@]+@[^@]+\z/
@@ -21,7 +21,7 @@ Goma.configure do |config|
 
   ####################################################
   # Confirmable
-  # config.mailer_for_activation = nil
+  # config.activation_mailer_name = nil
   # config.mailer_for_email_confirmation = nil
   # config.confirmation_keys = [ :email ]
   # config.allow_unconfirmed_access_for = 0
@@ -52,7 +52,7 @@ Goma.configure do |config|
 
   ####################################################
   # Lockable
-  # config.mailer_for_unlock = nil
+  # config.unlock_token_mailer_name = nil
   # config.lock_strategy = :failed_attempts
   # config.unlock_keys = [ :email ]
   # config.unlock_strategies = [ :email, :time ]
@@ -64,7 +64,7 @@ Goma.configure do |config|
 
   ####################################################
   # Recoverable
-  # config.mailer_for_password_reset = nil
+  # config.reset_password_mailer_name = nil
   # config.reset_password_keys = [ :email ]
   # config.reset_password_within = 6.hours
   # config.reset_password_token_attribute_name = :reset_password_token
