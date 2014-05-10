@@ -1,28 +1,37 @@
 Goma.configure do |config|
   # config.default_mailer_name = 'UserMailer'
   config.mailer_sender = 'please-change-me-at-config-initializers-goma@example.com'
-  # config.authentication_keys = [ :email ]
-  # config.email_regexp = /\A[^@]+@[^@]+\z/
-  # config.case_insensitive_keys = [ :email ]
-  # config.strip_whitespace_keys = [ :email ]
   # config.clean_up_csrf_token_on_authentication = true
   config.secret_key = '<%= SecureRandom.hex(64) %>'
-  # config.encryptor = :bcrypt
-  config.stretches = Rails.env.test? ? 1 : 10
-  # config.pepper = '<%= SecureRandom.hex(64) %>'
-  # config.serialization_method = :devise
+  # config.serialization_method = :goma
   # config.scopes = [:user]
   # config.default_scope = :user
   # config.modules = [:password_authenticatable]
+  # config.save_return_to_url = true
+  # config.not_authenticated_action = :not_authenticated
 
+
+  ####################################################
+  # Password authenticatable
+  # config.authentication_keys = [ :email ]
+  # config.case_insensitive_keys = [ :email ]
+  # config.strip_whitespace_keys = [ :email ]
+  # config.encryptor = :bcrypt
+  # config.pepper = '<%= SecureRandom.hex(64) %>'
+  config.stretches = Rails.env.test? ? 1 : 10
   # config.email_attribute_name = :email
   # config.password_attribute_name = :password
   # config.encrypted_password_attribute_name = :encrypted_password
 
   ####################################################
+  # Validatable
+  # config.password_length = 6..128
+  # config.email_regexp = /\A[^@]+@[^@]+\z/
+
+  ####################################################
   # Confirmable
   # config.activation_mailer_name = nil
-  # config.mailer_for_email_confirmation = nil
+  # config.email_confirmation_mailer_name = nil
   # config.confirmation_keys = [ :email ]
   # config.allow_unconfirmed_access_for = 0
   # config.activate_within = 3.days
@@ -44,22 +53,28 @@ Goma.configure do |config|
   # config.remember_for = 2.weeks
   # config.extend_remember_period = false
   # config.rememberable_options = {}
+  # config.remember_token_attribute_name = :remember_token
+  # config.remember_created_at_attribute_name = :remember_created_at
 
 
   ####################################################
   # Timeoutable
   # config.timeout_in = 30.minutes
   # config.logout_all_scopes = false
+  # config.validate_session_even_in_not_login_area = true
 
   ####################################################
   # Lockable
   # config.unlock_token_mailer_name = nil
+  # config.unlock_token_email_method_name = :unlock_email
   # config.lock_strategy = :failed_attempts
   # config.unlock_keys = [ :email ]
   # config.unlock_strategies = [ :email, :time ]
   # config.maximum_attempts = 20
+  # config.failed_attempts_attribute_name = :failed_attempts
+  # config.locked_at_attribute_name = :locked_at
   # config.unlock_in = 1.hour
-  # config.last_attempt_warning = false
+  # config.last_attempt_warning = false # TODO not yet implemented
   # config.unlock_token_attribute_name = :unlock_token
   # config.unlock_token_sent_at_attribute_name = :unlock_token_sent_at
   # config.unlock_token_to_send_attribute_name = :raw_unlock_token
@@ -67,11 +82,20 @@ Goma.configure do |config|
   ####################################################
   # Recoverable
   # config.reset_password_mailer_name = nil
+  # config.reset_password_email_method_name = :reset_password_email
   # config.reset_password_keys = [ :email ]
   # config.reset_password_within = 6.hours
   # config.reset_password_token_attribute_name = :reset_password_token
   # config.reset_password_token_sent_at_attribute_name = :reset_password_token_sent_at
   # config.reset_password_token_to_send_attribute_name = :raw_reset_password_token
+
+  ####################################################
+  # Trackable
+  # config.login_count_attribute_name = :login_count
+  # config.current_login_at_attribute_name = :current_login_at
+  # config.last_login_at_attribute_name = :last_login_at
+  # config.current_login_ip_attribute_name = :current_login_ip
+  # config.last_login_ip_attribute_name = :last_login_ip
 
   ####################################################
   # Omniauthable
@@ -83,14 +107,9 @@ Goma.configure do |config|
   # config.oauth_authentication_class_name = 'Authentication'
   # config.oauth_provider_attribute_name = :provider
   # config.oauth_uid_attribute_name = :uid
-
-
-  ####################################################
-  # Attribute names settings
-  # config.salt_attribute_name = nil
-  # config.salt_join_token = ''
 end
 
 # Scope specific configuration
 # Goma.configure_for(:user) do |config|
+  # -- scope specifig configurations goes here --
 # end

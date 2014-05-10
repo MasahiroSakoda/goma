@@ -42,16 +42,8 @@ module Goma
     include Goma::Configurable
     config_accessor(:default_mailer_name)                          { 'UserMailer' }
     config_accessor(:mailer_sender)
-    config_accessor(:authentication_keys)                          { [:email] }
-    config_accessor(:email_regexp)                                 { /\A[^@]+@[^@]+\z/ }
-    config_accessor(:password_length)                              { 6..128 }
-    config_accessor(:case_insensitive_keys)                        { [:email] }
-    config_accessor(:strip_whitespace_keys)                        { [:email] }
     config_accessor(:clean_up_csrf_token_on_authentication)        { true }
     config_accessor(:secret_key)
-    config_accessor(:encryptor)                                    { :bcrypt }
-    config_accessor(:stretches)                                    { 10 }
-    config_accessor(:pepper)
     config_accessor(:serialization_method)                         { :goma }
     config_accessor(:scopes)                                       { [:user] }
     config_accessor(:default_scope)                                { :user }
@@ -59,9 +51,21 @@ module Goma
     config_accessor(:save_return_to_url)                           { true }
     config_accessor(:not_authenticated_action)                     { :not_authenticated }
 
+
+    # Password authenticatable
+    config_accessor(:authentication_keys)                          { [:email] }
+    config_accessor(:case_insensitive_keys)                        { [:email] }
+    config_accessor(:strip_whitespace_keys)                        { [:email] }
+    config_accessor(:encryptor)                                    { :bcrypt }
+    config_accessor(:pepper)
+    config_accessor(:stretches)                                    { 10 }
     config_accessor(:email_attribute_name)                         { :email }
     config_accessor(:password_attribute_name)                      { :password }
     config_accessor(:encrypted_password_attribute_name)            { :encrypted_password }
+
+    # Validatable
+    config_accessor(:password_length)                              { 6..128 }
+    config_accessor(:email_regexp)                                 { /\A[^@]+@[^@]+\z/ }
 
     # Confirmable
     config_accessor(:activation_mailer_name)                       { nil }
@@ -103,10 +107,10 @@ module Goma
     config_accessor(:maximum_attempts)                             { 20 }
     config_accessor(:failed_attempts_attribute_name)               { :failed_attempts }
     config_accessor(:locked_at_attribute_name)                     { :locked_at }
+    config_accessor(:unlock_in)                                    { 1.hour }
     config_accessor(:unlock_token_attribute_name)                  { :unlock_token }
     config_accessor(:unlock_token_sent_at_attribute_name)          { :unlock_token_sent_at }
     config_accessor(:unlock_token_to_send_attribute_name)          { :raw_unlock_token }
-    config_accessor(:unlock_in)                                    { 1.hour }
 
     # Recoverable
     config_accessor(:reset_password_mailer_name)                   { nil }
@@ -133,9 +137,6 @@ module Goma
       oauth_providers[provider] = {key: app_id, secret: app_secret}
     end
 
-    # TODO
-    config_accessor(:salt_attribute_name)                       { nil }
-    config_accessor(:salt_join_token)                           { '' }
 
     self.instance_methods(false).grep(/attribute_name$/).each do |conf_name|
       name = conf_name.to_s[0...-15]
