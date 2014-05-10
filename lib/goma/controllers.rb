@@ -45,8 +45,12 @@ module Goma
 
       def require_#{scope}_login
         return if #{scope}_logged_in?
-        #{config.save_return_to_url ? "session[:return_to_url] = request.url if request.get?" : ''}
+        #{config.save_return_to_url ? "store_return_to_url(:#{scope}, request.url) if request.get?" : ''}
         #{config.not_authenticated_action}
+      end
+
+      def #{scope}_redirect_back_or_to(url, options={})
+        redirect_back_or_to(url, options.merge!(scope: :#{scope}))
       end
       RUBY
     end
@@ -87,9 +91,25 @@ module Goma
       Goma.config.scopes.each { |scope| logout(scope, timeout: timeout) }
     end
 
-    def redirect_back_or_to(url, flash_hash={})
-      redirect_to(session[:return_to_url] || url, flash: flash_hash)
-      session[:return_to_url] = nil
+    def redirect_back_or_to(url, options={})
+      scope = options.delete(:scope) || Goma.config.default_scope
+      redirect_to(return_to_url(scope, clear: true) || url, flash: options)
+    end
+
+    def store_return_to_url(scope, url)
+      session[return_to_url_key(scope)] = url
+    end
+
+    def return_to_url(scope, clear: false)
+      if clear
+        session.delete(return_to_url_key(scope))
+      else
+        session[return_to_url_key(scope)]
+      end
+    end
+
+    def return_to_url_key(scope)
+      "#{scope}_return_to"
     end
 
     def not_authenticated
