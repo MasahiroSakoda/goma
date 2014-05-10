@@ -17,6 +17,24 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")
   s.require_paths = ['lib']
+  s.post_install_message =<<-MESSAGE
+\e[32mThank you for installing!
+
+You can use this gem as follows:
+
+\e[0mrails g goma:install\e[32m
+
+Edit config/initializers/goma.rb to fit your needs.
+
+\e[0mrails g goma:scaffold User\e[32m
+
+That's it.
+
+This gem is in early development phase and I do not recommend you to use this for production for a while.
+Bug reports and pull requests are welcome.
+
+Enjoy!\e[0m
+MESSAGE
 
   s.add_dependency "rails", "~> 4.0"
   s.add_dependency "warden"
