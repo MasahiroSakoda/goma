@@ -1,6 +1,6 @@
 <% module_namespacing do -%>
 class <%= class_name %> < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "<%= goma_config.mailer_sender %>"
 
 <% goma_actions.each do |action, subject| -%>
   # Subject can be set in your I18n file at config/locales/en.yml
