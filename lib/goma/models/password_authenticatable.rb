@@ -6,7 +6,6 @@ module Goma
       included do
         password_attr = goma_config.password_attribute_name
         attr_reader password_attr, "current_#{password_attr}"
-        attr_accessor "#{password_attr}_confirmation"
 
         class_eval <<-METHOD, __FILE__, __LINE__ + 1
         def #{password_attr}=(new_#{password_attr})
