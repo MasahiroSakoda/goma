@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/kentaroi/uninclude.git
-  revision: f9c79125de5f82cf037031bb2a83de733a716562
-  branch: make_compatible_with_2.1.1_spike
-  specs:
-    uninclude (1.0.1)
-
 PATH
   remote: .
   specs:
@@ -125,4 +118,3 @@ DEPENDENCIES
   single_test
   sqlite3
   timecop
-  uninclude!

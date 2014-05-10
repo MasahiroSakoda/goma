@@ -15,5 +15,4 @@ gemspec
 
 group :development, :test do
   gem 'omniauth'
-  gem 'uninclude', github: 'kentaroi/uninclude', branch: 'make_compatible_with_2.1.1_spike'
 end
