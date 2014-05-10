@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    goma (0.0.1.alpha)
+    goma (0.0.1.beta)
       rails (~> 4.0)
       warden
 
