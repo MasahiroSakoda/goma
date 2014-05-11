@@ -38,14 +38,14 @@ module Goma
       end
 
       def resource_string
-        "#{resources_or_resource} :#{file_name.pluralize}#{restriction}#{appending_string}"
+        "#{resource_definition}#{restriction}#{appending_string}"
       end
 
-      def resources_or_resource
-        if options[:controller_type] == :session
-          "resource"
+      def resource_definition
+        if options[:controller_type] == 'session'
+          "resource :#{file_name.singularize}"
         else
-          "resources"
+          "resources :#{file_name.pluralize}"
         end
       end
 
