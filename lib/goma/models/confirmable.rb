@@ -82,7 +82,7 @@ module Goma
       end
 
       def send_activation_needed_email?
-        goma_config.activation_needed_email_method_name && !@skip_activation_needed_email
+        !activated? && goma_config.activation_needed_email_method_name && !@skip_activation_needed_email
       end
 
       def send_activation_success_email?
