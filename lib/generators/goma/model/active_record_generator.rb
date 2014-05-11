@@ -12,6 +12,17 @@ module Goma
           merge_goma_user_attributes!
         end
 
+        def add_options_to_migration
+          if path = self.class.migration_exists?('db/migrate', migration_file_name)
+            gsub_file(path,
+                      "t.integer :#{goma_config.failed_attempts_attribute_name}",
+                      "t.integer :#{goma_config.failed_attempts_attribute_name}, default: 0, null: false")
+            gsub_file(path,
+                      "t.integer :#{goma_config.login_count_attribute_name}",
+                      "t.integer :#{goma_config.login_count_attribute_name}, default: 0, null: false")
+          end
+        end
+
       private
         def merge_goma_user_attributes!
           self.attributes = (goma_user_attributes.map do |attr|
