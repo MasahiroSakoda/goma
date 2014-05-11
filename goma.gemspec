@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- test/*`.split("\n")
   s.require_paths = ['lib']
   s.post_install_message =<<-MESSAGE
+
 \e[32mThank you for installing!
 
 You can use this gem as follows:
@@ -27,6 +28,21 @@ You can use this gem as follows:
 Edit config/initializers/goma.rb to fit your needs.
 
 \e[0mrails g goma:scaffold User\e[32m
+
+
+===========================================================================
+Some setup you must do manually if you heven't yet:
+
+- Ensure you have defined default url options in your environments files.
+  Here is an example of default_url_options appropriate for a development
+  environment in config/environments/development.rb
+
+  \e[0mconfig.action_mailer.default_url_options = { host: 'localhost:3000' }\e[32m
+
+  in production, :host should be set to the actual host of your application.
+
+===========================================================================
+
 
 That's it.
 
