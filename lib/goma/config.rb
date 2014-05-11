@@ -97,7 +97,7 @@ module Goma
     config_accessor(:remember_for)                                 { 2.weeks }
     config_accessor(:extend_remember_period)                       { false }
     config_accessor(:rememberable_options)                         { {} }
-    config_accessor(:remember_token_attribute_name)                { :remember_token }
+    config_accessor(:remember_token_attribute_name)                { nil }
     config_accessor(:remember_created_at_attribute_name)           { :remember_created_at }
 
     # Timeoutable

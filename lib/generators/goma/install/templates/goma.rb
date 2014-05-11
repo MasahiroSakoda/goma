@@ -55,7 +55,7 @@ Goma.configure do |config|
   # config.remember_for = 2.weeks
   # config.extend_remember_period = false
   # config.rememberable_options = {}
-  # config.remember_token_attribute_name = :remember_token
+  # config.remember_token_attribute_name = nil
   # config.remember_created_at_attribute_name = :remember_created_at
 
 

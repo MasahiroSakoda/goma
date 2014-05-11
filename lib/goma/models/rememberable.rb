@@ -28,13 +28,13 @@ module Goma
 
       def forget_me!
         return unless persisted?
-        send(goma_config.remember_token_setter, nil)
+        send(goma_config.remember_token_setter, nil) if goma_config.remember_token_attribute_name
         send(goma_config.remember_created_at_setter, nil)
         save(validate: false)
       end
 
       def rememberable_value
-        if respond_to?(:remember_token)
+        if goma_config.remember_token_attribute_name
           send(goma_config.remember_token_getter)
         elsif salt = authenticatable_salt
           salt
