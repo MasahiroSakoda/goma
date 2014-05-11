@@ -6,7 +6,7 @@ Goma.configure do |config|
   # config.serialization_method = :goma
   # config.scopes = [:user]
   # config.default_scope = :user
-  # config.modules = [:password_authenticatable]
+  # config.modules = [:password_authenticatable, :validatable, :confirmable, :rememberable, :timeoutable, :lockable, :trackable, :omniauthable]
   # config.save_return_to_url = true
   # config.not_authenticated_action = :not_authenticated
 

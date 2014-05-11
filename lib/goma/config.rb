@@ -47,7 +47,14 @@ module Goma
     config_accessor(:serialization_method)                         { :goma }
     config_accessor(:scopes)                                       { [:user] }
     config_accessor(:default_scope)                                { :user }
-    config_accessor(:modules)                                      { [:password_authenticatable] }
+    config_accessor(:modules)                                      { [:password_authenticatable,
+                                                                      :validatable,
+                                                                      :confirmable,
+                                                                      :rememberable,
+                                                                      :timeoutable,
+                                                                      :lockable,
+                                                                      :trackable,
+                                                                      :omniauthable] }
     config_accessor(:save_return_to_url)                           { true }
     config_accessor(:not_authenticated_action)                     { :not_authenticated }
 
