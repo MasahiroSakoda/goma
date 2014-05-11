@@ -71,7 +71,7 @@ module Goma
     config_accessor(:encrypted_password_attribute_name)            { :encrypted_password }
 
     # Validatable
-    config_accessor(:password_length)                              { 6..128 }
+    config_accessor(:password_length)                              { 8..128 }
     config_accessor(:email_regexp)                                 { /\A[^@]+@[^@]+\z/ }
 
     # Confirmable

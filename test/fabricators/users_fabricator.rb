@@ -1,8 +1,8 @@
 Fabricator(:user) do
   username { sequence(:username) { |i| "user#{i}" } }
   email { sequence(:email) { |i| "user#{i}@example.com" } }
-  password 'secret'
-  password_confirmation 'secret'
+  password 'password'
+  password_confirmation 'password'
   activated_at Time.new.utc
 end
 

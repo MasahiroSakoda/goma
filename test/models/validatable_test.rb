@@ -7,43 +7,43 @@ class ValidatableTest < ActiveSupport::TestCase
 
   test 'should pass all the validations with valid data' do
     assert_difference 'User.count', 1 do
-      User.create!(username: 'bar', email: 'bar@example.com', password: 'secret', password_confirmation: 'secret')
+      User.create!(username: 'bar', email: 'bar@example.com', password: 'password', password_confirmation: 'password')
     end
   end
 
   test 'should validates_presence_of :username' do
     assert_raise ActiveRecord::RecordInvalid do
-      user = User.create!(username: nil, email: 'bar@example.com', password: 'secret', password_confirmation: 'secret')
+      user = User.create!(username: nil, email: 'bar@example.com', password: 'password', password_confirmation: 'password')
     end
   end
 
   test 'should validates_uniqueness_of :username' do
     assert_raise ActiveRecord::RecordInvalid do
-      user = User.create!(username: 'foo', email: 'bar@example.com', password: 'secret', password_confirmation: 'secret')
+      user = User.create!(username: 'foo', email: 'bar@example.com', password: 'password', password_confirmation: 'password')
     end
   end
 
   test 'should validates_presence_of :email' do
     assert_raise ActiveRecord::RecordInvalid do
-      user = User.create!(username: 'foo', email: nil, password: 'secret', password_confirmation: 'secret')
+      user = User.create!(username: 'foo', email: nil, password: 'password', password_confirmation: 'password')
     end
   end
 
   test 'should validates_uniqueness_of :email' do
     assert_raise ActiveRecord::RecordInvalid do
-      user = User.create!(username: 'bar', email: 'foo@example.com', password: 'secret', password_confirmation: 'secret')
+      user = User.create!(username: 'bar', email: 'foo@example.com', password: 'password', password_confirmation: 'password')
     end
   end
 
   test 'should validates_format_of :email' do
     assert_raise ActiveRecord::RecordInvalid do
-      user = User.create!(username: 'bar', email: 'bar.example.com', password: 'secret', password_confirmation: 'secret')
+      user = User.create!(username: 'bar', email: 'bar.example.com', password: 'password', password_confirmation: 'password')
     end
   end
 
   test 'should validates_length_of :password with too short password' do
     assert_raise ActiveRecord::RecordInvalid do
-      user = User.create!(username: 'bar', email: 'bar@example.com', password: 's' * 5, password_confirmation: 's' * 5)
+      user = User.create!(username: 'bar', email: 'bar@example.com', password: 's' * 7, password_confirmation: 's' * 7)
     end
   end
 

@@ -3,7 +3,7 @@ Goma.configure do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-goma@example.com'
   config.authentication_keys = [ :username, :email ]
   # config.email_regexp = /\A[^@]+@[^@]+\z/
-  # config.password_length = 6..128
+  # config.password_length = 8..128
   # config.case_insensitive_keys = [ :email ]
   # config.strip_whitespace_keys = [ :email ]
   # config.clean_up_csrf_token_on_authentication = true

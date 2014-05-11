@@ -14,10 +14,10 @@ class LockableControllerTest < ActionController::TestCase
 
   should 'be reset failed_attempts when user logs in successfully' do
     assert_equal 0, @user.failed_attempts
-    2.times{ post :create, {username_or_email: @user.email, password: 'wrong'} }
+    2.times{ post :create, {username_or_email: @user.email, password: 'wrongpass'} }
     assert_equal 2, @user.reload.failed_attempts
 
-    post :create, {username_or_email: @user.email, password: 'secret'}
+    post :create, {username_or_email: @user.email, password: 'password'}
     assert_equal 0, @user.reload.failed_attempts
   end
 
@@ -33,13 +33,13 @@ class LockableControllerTest < ActionController::TestCase
     should 'be locked when number of login attemps exceeds config.maximum_attempts' do
       assert_no_difference 'ActionMailer::Base.deliveries.count' do
         5.times do
-          post :create, {username_or_email: @user.email, password: 'wrong'}
+          post :create, {username_or_email: @user.email, password: 'wrongpass'}
         end
       end
       refute @user.reload.access_locked?
 
       assert_difference 'ActionMailer::Base.deliveries.count', 1 do
-        post :create, {username_or_email: @user.email, password: 'wrong'}
+        post :create, {username_or_email: @user.email, password: 'wrongpass'}
       end
       assert @user.reload.access_locked?
     end
@@ -47,7 +47,7 @@ class LockableControllerTest < ActionController::TestCase
 
     should 'not be unlocked after config.unlock_in time' do
       6.times do
-        post :create, {username_or_email: @user.email, password: 'wrong'}
+        post :create, {username_or_email: @user.email, password: 'wrongpass'}
       end
       assert @user.reload.access_locked?
 
@@ -70,20 +70,20 @@ class LockableControllerTest < ActionController::TestCase
     should 'be locked without sending email' do
       assert_no_difference 'ActionMailer::Base.deliveries.count' do
         5.times do
-          post :create, {username_or_email: @user.email, password: 'wrong'}
+          post :create, {username_or_email: @user.email, password: 'wrongpass'}
         end
       end
       refute @user.reload.access_locked?
 
       assert_no_difference 'ActionMailer::Base.deliveries.count' do
-        post :create, {username_or_email: @user.email, password: 'wrong'}
+        post :create, {username_or_email: @user.email, password: 'wrongpass'}
       end
       assert @user.reload.access_locked?
     end
 
     should 'be unlocked after config.unlock_in time' do
       6.times do
-        post :create, {username_or_email: @user.email, password: 'wrong'}
+        post :create, {username_or_email: @user.email, password: 'wrongpass'}
       end
       assert @user.reload.access_locked?
 

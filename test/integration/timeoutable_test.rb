@@ -3,7 +3,7 @@ require 'test_helper'
 class TimeoutableTest < ActionDispatch::IntegrationTest
   def setup
     @user = Fabricate(:user)
-    post 'session', username_or_email: @user.email, password: 'secret'
+    post 'session', username_or_email: @user.email, password: 'password'
   end
 
   test "should set goma.last_request_at immediately after login" do
@@ -107,7 +107,7 @@ end
 # #     Goma.config.validate_session_even_in_not_login_area = false
 # #     reinclude_timeout_module
 #     @user = Fabricate(:user)
-#     post 'session', username_or_email: @user.email, password: 'secret'
+#     post 'session', username_or_email: @user.email, password: 'password'
 #   end
 # #
 # #   def teardown

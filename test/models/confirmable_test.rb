@@ -3,7 +3,7 @@ require "test_helper"
 class ConfirmableTest < ActiveSupport::TestCase
   context "A newly created user" do
     setup do
-      @user = User.new(username: 'foo', email: 'foo@example.com', password: 'secret')
+      @user = User.new(username: 'foo', email: 'foo@example.com', password: 'password')
     end
 
     should "not be activated" do

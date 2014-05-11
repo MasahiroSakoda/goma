@@ -6,7 +6,7 @@ class RememberableTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not remember when remember_me is not set' do
-    post 'session', username_or_email: @user.email, password: 'secret'
+    post 'session', username_or_email: @user.email, password: 'password'
     assert @user, request.env['warden'].user(:user)
 
     Timecop.freeze 30.minutes.from_now
@@ -19,7 +19,7 @@ class RememberableTest < ActionDispatch::IntegrationTest
   test 'should remember' do
     swap ApplicationController, allow_forgery_protection: true do
       get 'session/new'
-      post 'session', username_or_email: @user.email, password: 'secret', remember_me: '1', authenticity_token: session['_csrf_token']
+      post 'session', username_or_email: @user.email, password: 'password', remember_me: '1', authenticity_token: session['_csrf_token']
 
       @user.reload
       assert @user, request.env['warden'].user(:user)
@@ -38,7 +38,7 @@ class RememberableTest < ActionDispatch::IntegrationTest
     swap ApplicationController, allow_forgery_protection: true do
       get 'session/new'
       assert_raise ActionController::InvalidAuthenticityToken do
-        post 'session', username_or_email: @user.email, password: 'secret', remember_me: '1'
+        post 'session', username_or_email: @user.email, password: 'password', remember_me: '1'
       end
 
       refute request.env['warden'].user(:user)
@@ -51,7 +51,7 @@ class RememberableTest < ActionDispatch::IntegrationTest
     swap ApplicationController, allow_forgery_protection: true do
       get 'session/new'
       assert_raise ActionController::InvalidAuthenticityToken do
-        post 'session', username_or_email: @user.email, password: 'secret', remember_me: '1', authenticity_token: 'wrong'
+        post 'session', username_or_email: @user.email, password: 'password', remember_me: '1', authenticity_token: 'wrong'
       end
 
       refute request.env['warden'].user(:user)
@@ -63,7 +63,7 @@ class RememberableTest < ActionDispatch::IntegrationTest
   test 'should login with remember cookie' do
     swap ApplicationController, allow_forgery_protection: true do
       get 'session/new'
-      post 'session', username_or_email: @user.email, password: 'secret', remember_me: '1', authenticity_token: session['_csrf_token']
+      post 'session', username_or_email: @user.email, password: 'password', remember_me: '1', authenticity_token: session['_csrf_token']
 
       reset!
 
@@ -81,7 +81,7 @@ class RememberableTest < ActionDispatch::IntegrationTest
   test  'should forget when logout' do
     swap ApplicationController, allow_forgery_protection: true do
       get 'session/new'
-      post 'session', username_or_email: @user.email, password: 'secret', remember_me: '1', authenticity_token: session['_csrf_token']
+      post 'session', username_or_email: @user.email, password: 'password', remember_me: '1', authenticity_token: session['_csrf_token']
       assert @user, request.env['warden'].user(:user)
 
       delete 'session', authenticity_token: session['_csrf_token']

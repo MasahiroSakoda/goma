@@ -14,7 +14,7 @@ class TrackableTest < ActionDispatch::IntegrationTest
 
     Timecop.freeze 10.minutes.from_now
     @login_at = Time.now.utc
-    post 'session', username_or_email: @user.email, password: 'secret'
+    post 'session', username_or_email: @user.email, password: 'password'
 
     Timecop.travel 10.minutes.from_now
 
@@ -40,7 +40,7 @@ class TrackableTest < ActionDispatch::IntegrationTest
 
     Timecop.freeze 10.minutes.from_now
     @second_login_at = Time.now.utc
-    post 'session', {username_or_email: @user.email, password: 'secret'}, {'REMOTE_ADDR' => '192.168.1.10'}
+    post 'session', {username_or_email: @user.email, password: 'password'}, {'REMOTE_ADDR' => '192.168.1.10'}
 
     Timecop.travel 10.minutes.from_now
 
