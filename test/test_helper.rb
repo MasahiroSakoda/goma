@@ -61,6 +61,14 @@ class ActionDispatch::IntegrationTest
     request.cookie_jar.signed['raw_cookie'] = raw_cookie
     request.cookie_jar['raw_cookie']
   end
+
+  def warden
+    request.env['warden']
+  end
+
+  def current_user
+    warden.user(scope: :user)
+  end
 end
 
 OmniAuth.config.test_mode = true
