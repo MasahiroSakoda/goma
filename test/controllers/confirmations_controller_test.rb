@@ -5,7 +5,7 @@ class ConfirmationsControllerTest < ActionController::TestCase
     user = User.new(username: 'foo', email: 'foo@example.com', password: 'password', password_confirmation: 'password')
     user.save!
 
-    get :activate, id: user.raw_confirmation_token
+    get :show, id: user.raw_confirmation_token
     assert_redirected_to new_session_url
     assert flash[:notice]
     user.reload

@@ -20,8 +20,8 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
 
 
-  # GET <%= route_url %>/1/activate
-  def activate
+  # GET <%= route_url %>/1
+  def show
     @<%= resource_name %>, err = <%= resource_class_name %>.load_from_activation_token_with_error(params[:id])
 
     if @<%= resource_name %>
@@ -38,8 +38,8 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
 
 
-  # GET <%= route_url %>/1/confirm
-  def confirm
+  # GET <%= route_url %>/1/email
+  def email
     @<%= resource_name %>, err = <%= resource_class_name %>.load_from_email_confirmation_token_with_error(params[:id])
 
     if @<%= resource_name %>

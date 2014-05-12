@@ -2,16 +2,22 @@ RailsApp::Application.routes.draw do
   resources :authentications, only: [:create]
   get '/auth/:provider/callback', to: 'authentications#create'
 
+  resources :unlocks, only: [:show, :new, :create]
+
+  resources :confirmations, only: [:show, :new, :create] do
+    get :email,  on: :member
+  end
+
+  resource :session, only: [:new, :create, :destroy]
+
+  resources :users
+
   resources :unlocks, only: [:show, :new, :create,]
 
   resources :confirmations, only: [:new, :create] do
     get :activate, on: :member
     get :confirm,  on: :member
   end
-
-  resource :session, only: [:new, :create, :destroy]
-
-  resources :users
 
   root to: 'home#index'
 

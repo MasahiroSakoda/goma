@@ -3,4 +3,4 @@ Hello, <%%= @<%= resource_name %>.<%= goma_config.email_attribute_name %> %>
 
 You can confirm your account email through the link below:
 
-<%%= confirm_confirmation_url(@<%= resource_name %>.<%= goma_config.confirmation_token_to_send_attribute_name %>) %>
+<%%= email_confirmation_url(@<%= resource_name %>.<%= goma_config.confirmation_token_to_send_attribute_name %>) %>

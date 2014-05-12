@@ -15,8 +15,8 @@ class ConfirmationsController < ApplicationController
   end
 
 
-  # GET /confirmations/1/activate
-  def activate
+  # GET /confirmations/1
+  def show
     @user, err = User.load_from_activation_token_with_error(params[:id])
 
     if @user
@@ -33,8 +33,8 @@ class ConfirmationsController < ApplicationController
   end
 
 
-  # GET /confirmations/1/confirm
-  def confirm
+  # GET /confirmations/1/email
+  def email
     @user, err = User.load_from_email_confirmation_token_with_error(params[:id])
 
     if @user

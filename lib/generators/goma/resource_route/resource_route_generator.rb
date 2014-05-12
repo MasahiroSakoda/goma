@@ -53,12 +53,10 @@ module Goma
         case options[:controller_type]
         when 'session'
           ', only: [:new, :create, :destroy]'
-        when 'confirmation'
-          ', only: [:new, :create]'
+        when 'confirmation', 'unlock'
+          ', only: [:show, :new, :create]'
         when 'password'
           ', only: [:new, :create, :edit, :update]'
-        when 'unlock'
-          ', only: [:show, :new, :create,]'
         when 'oauth'
           ', only: [:create]'
         else
@@ -67,11 +65,11 @@ module Goma
       end
 
       def appending_string
-        if options[:controller_type] == 'confirmation' && goma_config.modules.include?(:confirmable)
+        if options[:controller_type] == 'confirmation' &&
+          goma_config.modules.include?(:confirmable) && goma_config.email_confirmation_enabled
           strings = []
           strings << ' do'
-          strings << '  get :activate, on: :member'
-          strings << '  get :confirm,  on: :member' if goma_config.email_confirmation_enabled
+          strings << '  get :email,  on: :member'
           strings << 'end'
           strings.join("\n")
         elsif options[:controller_type] == 'oauth'
