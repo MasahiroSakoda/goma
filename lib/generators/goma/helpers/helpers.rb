@@ -66,3 +66,8 @@ module Goma
   end
 end
 
+class Array
+  def to_field_name
+    self.to_sentence(words_connector: '_', two_words_connector: '_or_', last_word_connector: '_or_')
+  end
+end

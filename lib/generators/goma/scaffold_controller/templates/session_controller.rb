@@ -13,7 +13,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # POST <%= route_url %>
   def create
 <% if goma_config.modules.include? :confirmable -%>
-     if @<%= resource_name %> = <%= resource_name %>_login(params[:identifier], params[:<%= goma_config.password_attribute_name %>]<% goma_config.modules.include?(:rememberable) ? ', params[:remember_me]' : '' %>)
+     if @<%= resource_name %> = <%= resource_name %>_login(params[:<%= goma_config.authentication_keys.to_field_name %>], params[:<%= goma_config.password_attribute_name %>]<%= goma_config.modules.include?(:rememberable) ? ', params[:remember_me]' : '' %>)
       <%= specify_scope_if_needed %>redirect_back_or_to root_url, notice: 'Login successful'
     else
       if goma_error(:<%= resource_name %>) == :not_activated
@@ -24,7 +24,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       render :new
     end
 <% else -%>
-    if @<%= resource_name %> = <%= resource_name %>_login(params[:identifier], params[:<%= goma_config.password_attribute_name %>])
+    if @<%= resource_name %> = <%= resource_name %>_login(params[:<%= goma_config.authentication_keys.to_field_name %>], params[:<%= goma_config.password_attribute_name %>])
       <%= specify_scope_if_needed %>redirect_back_or_to root_url, notice: 'Login successful'
     else
       flash.now[:alert] = 'Login failed'

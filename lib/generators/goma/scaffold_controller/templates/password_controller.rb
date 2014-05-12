@@ -12,7 +12,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # POST <%= route_url %>
   def create
-    @<%= resource_name %> = <%= resource_class_name %>.find_by_identifier(params[:identifier])
+    @<%= resource_name %> = <%= resource_class_name %>.find_by_identifier(params[:<%= goma_config.authentication_keys.to_field_name %>])
     @<%= resource_name %>.send_reset_password_instructions! if @<%= resource_name %>
 
     flash[:notice] = "You will receive an email with instructions about how to reset your password in a few minutes."

@@ -28,7 +28,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # POST <%= route_url %>
   def create
-    @<%= resource_name %> = <%= resource_class_name %>.find_by_identifier(params[:identifier])
+    @<%= resource_name %> = <%= resource_class_name %>.find_by_identifier(params[:<%= goma_config.authentication_keys.to_field_name %>])
     @<%= resource_name %>.send_unlock_instructions!
 
     flash[:notice] = 'Instructions have been sent to your email.'

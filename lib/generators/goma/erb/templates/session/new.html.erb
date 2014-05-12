@@ -1,9 +1,9 @@
 <h1>Login</h1>
 
-<%%= form_tag(<%= name.underscore.pluralize %>_url, method: :post) do %>
+<%%= form_tag(<%= name.underscore %>_url, method: :post) do %>
   <div class="field">
-    <%%= label_tag :<%= goma_config.authentication_keys.join('_or_') %> %><br>
-    <%%= text_field_tag :identifier %>
+    <%%= label_tag :<%= goma_config.authentication_keys.to_field_name %> %><br>
+    <%%= text_field_tag :<%= goma_config.authentication_keys.to_field_name %> %>
   </div>
   <div class="field">
     <%%= label_tag :<%= goma_config.password_attribute_name %> %><br>
