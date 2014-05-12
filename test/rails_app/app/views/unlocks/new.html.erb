@@ -1,0 +1,11 @@
+<h1>Resend unlock instructions</h1>
+
+<%= form_tag(unlocks_url, method: :post) do %>
+  <div class="field">
+    <%= label_tag :username_or_email %><br>
+    <%= text_field_tag :username_or_email
+  </div>
+  <div class="actions">
+    <%= submit_tag "Resend unlock instructions" %>
+  </div>
+<% end %>

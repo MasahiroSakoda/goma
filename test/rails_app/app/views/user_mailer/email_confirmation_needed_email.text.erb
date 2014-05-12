@@ -1,3 +1,6 @@
-UserMailer#email_confirmation_needed_email
+Hello, <%= @user.email %>
+============================================================
 
-<%= @greeting %>, find me in app/views/app/views/user_mailer/email_confirmation_needed_email.text.erb
+You can confirm your account email through the link below:
+
+<%= confirm_confirmation_url(@user.raw_confirmation_token) %>

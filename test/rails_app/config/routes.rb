@@ -1,13 +1,20 @@
 RailsApp::Application.routes.draw do
-  root to: 'home#index'
+  resources :authentications, only: [:create]
+  get '/auth/:provider/callback', to: 'authentications#create'
 
-  resources :users do
-    member do
-      get 'activate'
-    end
+  resources :unlocks, only: [:show, :new, :create,]
+
+  resources :confirmations, only: [:new, :create] do
+    get :activate, on: :member
+    get :confirm,  on: :member
   end
 
   resource :session, only: [:new, :create, :destroy]
+
+  resources :users
+
+  root to: 'home#index'
+
   get 'login' => 'sessions#new', as: :login
   delete 'logout' => 'sessions#destroy', as: :logout
 

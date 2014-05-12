@@ -1,3 +1,6 @@
-UserMailer#activation_needed_email
+Welcome, <%= @user.email %>
+============================================================
 
-<%= @greeting %>, find me in app/views/app/views/user_mailer/activation_needed_email.text.erb
+You can activate your account through the link below:
+
+<%= activate_confirmation_url(@user.raw_confirmation_token) %>

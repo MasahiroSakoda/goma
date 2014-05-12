@@ -1,0 +1,12 @@
+<h1>Resend activation instructions</h1>
+
+<%= form_tag(:confirmations_url, method: :post) do %>
+  <div class="field">
+    <%= label_tag :username_or_email %><br>
+    <%= text_field_tag :username_or_email
+  </div>
+  <div class="actions">
+    <%= submit_tag "Resend activation instructions" %>
+  </div>
+<% end %>
+

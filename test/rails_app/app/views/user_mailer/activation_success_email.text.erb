@@ -1,3 +1,8 @@
-UserMailer#activation_success_email
+Congratz, <%= @user.email %>
+============================================================
 
-<%= @greeting %>, find me in app/views/app/views/user_mailer/activation_success_email.text.erb
+You have successfully activated your account
+
+To login to the site, just follow the link below:
+
+<%= new_session_url %>

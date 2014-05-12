@@ -1,19 +1,27 @@
 class SessionsController < ApplicationController
+
+  # GET /sessions/new
   def new
     @user = User.new
   end
 
+  # POST /sessions
   def create
-    if @user = login(params[:username_or_email], params[:password], params[:remember_me])
+     if @user = user_login(params[:username_or_email], params[:password], params[:remember_me])
       redirect_back_or_to root_url, notice: 'Login successful'
     else
-      flash.now[:alert] = "Login failed"
-      render action: 'new'
+      if goma_error(:user) == :not_activated
+        flash.now[:alert] = 'Not activated'
+      else
+        flash.now[:alert] = 'Login failed'
+      end
+      render :new
     end
   end
 
+  # DELETE /sessions
   def destroy
-    logout
-    redirect_to root_url
+    user_logout
+    redirect_to root_url, notice: "Logged out!"
   end
 end

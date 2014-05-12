@@ -1,19 +1,27 @@
 <h1>Login</h1>
-<%= form_tag session_path do %>
+
+<%= form_tag(session_url, method: :post) do %>
   <div class="field">
-    <%= label_tag :username_or_email %><br />
+    <%= label_tag :username_or_email %><br>
     <%= text_field_tag :username_or_email %>
   </div>
   <div class="field">
-    <%= label_tag :password %><br />
+    <%= label_tag :password %><br>
     <%= password_field_tag :password %>
   </div>
+
   <div class="field">
-    <%= label_tag :remember_me %><br />
-    <%= check_box_tag :remember_me %>
+    <%= check_box_tag :remember_me %> <%= label_tag :remember_me %>
   </div>
+
   <div class="actions">
     <%= submit_tag "Login" %>
   </div>
 <% end %>
+
+<% if Rails.env.in? %w(development test) %>
+  <%= link_to 'Sign in with Developer', '/auth/developer' %>
+<% end %>
+<%#= link_to 'Sign in with Twitter', '/auth/twitter' %>
+<%#= link_to 'Sign in with Facebook', '/auth/facebook' %>
 

@@ -1,0 +1,10 @@
+Hello, <%= @user.email %>
+============================================================
+
+Your account has been locked due to an excessive number of unsuccessful login attempts.
+
+Click the link below to unlock your account:
+
+
+<%= unlock_url(@user.raw_unlock_token) %>
+
