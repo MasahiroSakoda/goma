@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RoutesTest < ActionDispatch::IntegrationTest
+class RoutesIntegrationTest < ActionDispatch::IntegrationTest
   def setup
     @user = Fabricate(:user, password: 'password')
   end

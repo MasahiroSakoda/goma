@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TrackableTest < ActionDispatch::IntegrationTest
+class TrackableIntegrationTest < ActionDispatch::IntegrationTest
   def setup
     @user = Fabricate(:user)
   end

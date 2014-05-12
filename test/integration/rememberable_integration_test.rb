@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RememberableTest < ActionDispatch::IntegrationTest
+class RememberableIntegrationTest < ActionDispatch::IntegrationTest
   def setup
     @user = Fabricate(:user)
   end

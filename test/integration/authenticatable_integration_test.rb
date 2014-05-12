@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AuthenticatableSessionTest < ActionDispatch::IntegrationTest
+class AuthenticatableSessionIntegrationTest < ActionDispatch::IntegrationTest
   def setup
     @user = Fabricate(:user)
   end

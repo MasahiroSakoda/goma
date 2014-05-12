@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TimeoutableTest < ActionDispatch::IntegrationTest
+class TimeoutableIntegrationTest < ActionDispatch::IntegrationTest
   def setup
     @user = Fabricate(:user)
     post 'session', username_or_email: @user.email, password: 'password'
