@@ -107,7 +107,7 @@ module Goma
 
     # Lockable
     config_accessor(:unlock_token_mailer_name)                     { nil }
-    config_accessor(:unlock_token_email_method_name)               { :unlock_email }
+    config_accessor(:unlock_token_email_method_name)               { :unlock_token_email }
     config_accessor(:lock_strategy)                                { :failed_attempts }
     config_accessor(:unlock_keys)                                  { :email }
     config_accessor(:unlock_strategies)                            { [:email, :time] }
