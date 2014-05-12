@@ -29,5 +29,17 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = false
 end
 
+desc "Rebuild test app's resources"
+task "rebuild_test_app" do
+  cd "test/rails_app"
+  sh "bundle exec rails d goma:scaffold User"
+  sh "bundle exec rails g goma:scaffold User"
+  sh "RAILS_ENV=test bundle exec rake db:drop"
+  sh "RAILS_ENV=test bundle exec rake db:create"
+  sh "RAILS_ENV=test bundle exec rake db:migrate"
+  sh "rm -rf test/*"
+  cd "../.."
+end
+
 
 task default: :test
