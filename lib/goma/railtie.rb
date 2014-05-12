@@ -89,15 +89,6 @@ module Goma
           Goma::Encryptors.const_get(Goma.config.encryptor.to_s.classify)
       end
 
-      if Goma.config.modules.include?(:omniauthable)
-        config.app_middleware.use ::OmniAuth::Builder do
-          Goma.config.oauth_providers.each do |service, oauth|
-            provider(service) and next if service.to_sym == :developer
-            provider service, oauth[:key], oauth[:secret]
-          end
-        end
-      end
-
       require 'goma/routes'
     end
   end

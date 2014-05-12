@@ -101,11 +101,6 @@ Goma.configure do |config|
 
   ####################################################
   # Omniauthable
-  # No providers are registered by default.
-  # ex.)
-  # config.omniauth :developer if Rails.env.in? ['development', 'test']
-  # config.omniauth :twitter, 'APP_ID', 'APP_SECRET'
-  #
   # config.oauth_authentication_class_name = 'Authentication'
   # config.oauth_provider_attribute_name = :provider
   # config.oauth_uid_attribute_name = :uid

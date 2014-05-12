@@ -136,13 +136,9 @@ module Goma
     config_accessor(:last_login_ip_attribute_name)                 { :last_login_ip }
 
     # Omniauthable
-    config_accessor(:oauth_providers)                              { {} }
     config_accessor(:oauth_authentication_class_name)              { 'Authentication' }
     config_accessor(:oauth_provider_attribute_name)                { :provider }
     config_accessor(:oauth_uid_attribute_name)                     { :uid }
-    def omniauth(provider, app_id=nil, app_secret=nil)
-      oauth_providers[provider] = {key: app_id, secret: app_secret}
-    end
 
 
     self.instance_methods(false).grep(/attribute_name$/).each do |conf_name|

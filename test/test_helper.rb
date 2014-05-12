@@ -62,3 +62,5 @@ class ActionDispatch::IntegrationTest
     request.cookie_jar['raw_cookie']
   end
 end
+
+OmniAuth.config.test_mode = true
