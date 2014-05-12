@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512044018) do
+ActiveRecord::Schema.define(version: 20140512081309) do
 
   create_table "authentications", force: true do |t|
     t.string   "provider"
@@ -33,11 +33,13 @@ ActiveRecord::Schema.define(version: 20140512044018) do
     t.datetime "confirmation_token_sent_at"
     t.string   "activated_at"
     t.datetime "remember_created_at"
-    t.integer  "failed_attempts",            default: 0, null: false
+    t.integer  "failed_attempts",              default: 0, null: false
     t.datetime "locked_at"
     t.string   "unlock_token"
     t.datetime "unlock_token_sent_at"
-    t.integer  "login_count",                default: 0, null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_token_sent_at"
+    t.integer  "login_count",                  default: 0, null: false
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
@@ -48,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140512044018) do
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
 

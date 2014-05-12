@@ -22,6 +22,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :unlock_token
       t.datetime :unlock_token_sent_at
 
+      # Recoverable
+      t.string :reset_password_token
+      t.datetime :reset_password_token_sent_at
+
       # Trackable
       t.integer :login_count, default: 0, null: false
       t.datetime :current_login_at
@@ -35,5 +39,6 @@ class CreateUsers < ActiveRecord::Migration
     add_index :users, :email, unique: true
     add_index :users, :confirmation_token, unique: true
     add_index :users, :unlock_token, unique: true
+    add_index :users, :reset_password_token, unique: true
   end
 end

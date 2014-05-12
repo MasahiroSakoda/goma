@@ -4,6 +4,8 @@ RailsApp::Application.routes.draw do
 
   resources :unlocks, only: [:show, :new, :create]
 
+  resources :passwords, only: [:new, :create, :edit, :update]
+
   resources :confirmations, only: [:show, :new, :create] do
     get :email,  on: :member
   end

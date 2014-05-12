@@ -1,0 +1,11 @@
+<h1>Forget your password?</h1>
+
+<%= form_tag(passwords_url, method: :post) do %>
+  <div class="field">
+    <%= label_tag :username_or_email %><br>
+    <%= text_field_tag :username_or_email %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Send me reset password instructions" %>
+  </div>
+<% end %>

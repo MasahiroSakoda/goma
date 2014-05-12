@@ -8,7 +8,7 @@ Goma.configure do |config|
   # config.default_scope = :user
   #
   # Select modules you need. All modules are included by default.
-  # config.modules = [:password_authenticatable, :validatable, :confirmable, :rememberable, :timeoutable, :lockable, :trackable, :omniauthable]
+  config.modules = [:password_authenticatable, :validatable, :confirmable, :rememberable, :timeoutable, :lockable, :recoverable, :trackable, :omniauthable]
   # config.save_return_to_url = true
   # config.not_authenticated_action = :not_authenticated
 
