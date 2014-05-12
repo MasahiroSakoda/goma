@@ -32,7 +32,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 <% if goma_config.modules.include?(:confirmable) && goma_config.allow_unactivated_access_for == 0 -%>
       redirect_to <%= login_url %>, notice: "You have signed up successfully. However, we could not sign you in because your account is not yet activated. You will receive an email with instructions about how to activate your account in a few minutes."
 <% else -%>
-      force_<%= singular_table_name %>_login(@<%= singular_table_name %>)
+      force_login(@<%= singular_table_name %>)
       redirect_back_or_to root_url, notice: "Welcome! You have signed up successfully.<%= goma_config.modules.include?(:confirmable) ? ' You will receive an email with instructions about how to activate your account in a few minutes.' : '' %>"
 <% end -%>
     else

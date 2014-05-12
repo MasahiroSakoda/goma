@@ -9,7 +9,7 @@ class AuthenticationsController < ApplicationController
     else
       user = User.create_with_omniauth!(omniauth)
     end
-    force_user_login(user)
+    force_login(user)
     redirect_back_or_to root_url, notice: "Successfully authenticated from #{omniauth[:provider]} account."
   end
 end

@@ -14,7 +14,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     else
       <%=resource_name %> = <%= resource_class_name %>.create_with_omniauth!(omniauth)
     end
-    force_<%= resource_name %>_login(<%= resource_name %>)
+    force_login(<%= resource_name %>)
     <%= specify_scope_if_needed %>redirect_back_or_to root_url, notice: "Successfully authenticated from #{omniauth[:provider]} account."
   end
 end

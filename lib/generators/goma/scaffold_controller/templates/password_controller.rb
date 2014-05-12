@@ -31,7 +31,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     if @<%= resource_name %>
       @<%= resource_name %>.unlock_access! if @<%= resource_name %>.lockable? && @<%= resource_name %>.access_locked?
       @<%= resource_name %>.change_password!(params[:<%= goma_config.password_attribute_name %>], params[:<%= goma_config.password_attribute_name %>_confirmation])
-      force_<%= resource_name %>_login(@<%= resource_name %>)
+      force_login(@<%= resource_name %>)
       <%= specify_scope_if_needed %>redirect_back_or_to root_url, notice: 'Your password was changed successfully. You are now logged in.'
     else
       if err == :token_expired
