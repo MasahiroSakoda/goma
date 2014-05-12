@@ -9,14 +9,23 @@ module Goma
           @generator_name = 'active_record'
           hide!
 
-          source_root File.expand_path('../../templates', __FILE__)
+          source_root File.expand_path('../templates', __FILE__)
 
           def initialize(*)
             super
             merge_goma_oauth_attributes!
           end
 
+          # This method overwrite is needed, because template source location is different. (one level deeper)
+          # I know this is terrible hack.
+          def create_migration_file
+            return unless options[:migration] && options[:parent].nil?
+            attributes.each { |a| a.attr_options.delete(:index) if a.reference? && !a.has_index? } if options[:indexes] == false
+            migration_template "../../../migration/templates/create_table_migration.rb", "db/migrate/create_#{table_name}.rb"
+          end
+
           def inject_index
+            # if path = self.class.migration_exists('db/migrate', migration_file_name)
             if behavior == :invoke
               insert_into_file("db/migrate/#{migration_number}_#{migration_file_name}.rb", goma_oauth_index, {after: /^\s{4,}end\s*\n/})
             end
