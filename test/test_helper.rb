@@ -12,6 +12,8 @@ end
 require 'mocha/setup'
 require 'shoulda-context'
 require 'timecop'
+require 'capybara/rails'
+
 require 'minitest/ansi'
 MiniTest::ANSI.use!
 require 'byebug'
@@ -46,6 +48,8 @@ class ActionController::TestCase
 end
 
 class ActionDispatch::IntegrationTest
+  include Capybara::DSL
+
   def signed_cookie(key)
     controller.send(:cookies).signed[key]
   end
@@ -68,6 +72,41 @@ class ActionDispatch::IntegrationTest
 
   def current_user
     warden.user(scope: :user)
+  end
+
+  # for Capybara
+  def _controller
+    page.driver.request.env['action_controller.instance']
+  end
+
+  def _request
+    _controller.request
+  end
+
+  def _session
+    _request.session
+  end
+
+  def _warden
+    _request.env['warden']
+  end
+
+  def _current_user
+    _warden.user(scope: :user)
+  end
+
+  def _cookies
+    _request.cookies
+  end
+
+  def _signed_cookie(key)
+    _controller.send(:cookies).signed[key]
+  end
+
+  def _update_signed_cookies(data)
+    data.each do |k, v|
+      _cookies[k.to_s] = generate_signed_cookie(v)
+    end
   end
 end
 

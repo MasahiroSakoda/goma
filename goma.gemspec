@@ -61,6 +61,7 @@ MESSAGE
   s.add_development_dependency "mocha"
   s.add_development_dependency "shoulda-context"
   s.add_development_dependency "timecop"
+  s.add_development_dependency "capybara"
   s.add_development_dependency "minitest-ansi"
   s.add_development_dependency "single_test"
   s.add_development_dependency "byebug"
