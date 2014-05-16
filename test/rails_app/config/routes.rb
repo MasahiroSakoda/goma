@@ -26,7 +26,7 @@ RailsApp::Application.routes.draw do
   get 'login' => 'sessions#new', as: :login
   delete 'logout' => 'sessions#destroy', as: :logout
 
-  get 'secret/index'
+  get 'secret/index', as: :secret
   get 'secret/not_track'
   get 'secret/not_timeout'
   get 'secret/not_validate_session'

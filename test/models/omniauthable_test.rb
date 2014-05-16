@@ -7,8 +7,8 @@ class OmniauthableTest < ActiveSupport::TestCase
   end
 
   should "create user from omniauth" do
-    User.any_instance.stubs(:fill_with_omniauth).with(@omniauth)
-    Authentication.any_instance.stubs(:fill_with_omniauth).with(@omniauth)
+    User.any_instance.expects(:fill_with_omniauth).with(@omniauth)
+    Authentication.any_instance.expects(:fill_with_omniauth).with(@omniauth)
 
     u = nil
     assert_difference ['User.count', 'Authentication.count'], 1 do

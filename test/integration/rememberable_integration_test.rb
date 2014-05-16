@@ -92,4 +92,18 @@ class RememberableIntegrationTest < ActionDispatch::IntegrationTest
       refute request.env['warden'].user(:user)
     end
   end
+
+  test 'should exist remember view element' do
+    visit new_session_url
+    fill_in :username_or_email, with: @user.email
+    fill_in :password, with: 'password'
+    check :remember_me
+    click_button 'Login'
+
+    @user.reload
+    assert_equal root_url, current_url
+    assert_equal @user, _current_user
+    assert _cookies['remember_user_token']
+    assert_equal @user.serialize_into_cookie, _signed_cookie('remember_user_token')
+  end
 end

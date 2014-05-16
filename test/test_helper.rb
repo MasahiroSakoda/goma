@@ -87,6 +87,10 @@ class ActionDispatch::IntegrationTest
     _request.session
   end
 
+  def _flash
+    _request.flash
+  end
+
   def _warden
     _request.env['warden']
   end

@@ -27,7 +27,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     should "load user record with correct activation token" do
       raw_token = @user.raw_confirmation_token
       loaded_user = User.load_from_activation_token!(raw_token)
-      assert_equal @user.id, loaded_user.id
+      assert_equal @user, loaded_user
     end
 
     should "raise exception with incorrect activation token" do
@@ -54,7 +54,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     should "return user record and nil with correct activation token" do
       raw_token = @user.raw_confirmation_token
       loaded_user, error = User.load_from_activation_token_with_error(raw_token)
-      assert_equal @user.id, loaded_user.id
+      assert_equal @user, loaded_user
       assert_nil error
     end
 
@@ -82,7 +82,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     should "return user record with correct activation token" do
       raw_token = @user.raw_confirmation_token
       loaded_user = User.load_from_activation_token(raw_token)
-      assert_equal @user.id, loaded_user.id
+      assert_equal @user, loaded_user
     end
 
     should "return nil with incorrect activation token" do
@@ -148,7 +148,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     should "find user record with correct email confirmation token" do
       raw_token = @user.raw_confirmation_token
       loaded_user = User.load_from_email_confirmation_token!(raw_token)
-      assert_equal @user.id, loaded_user.id
+      assert_equal @user, loaded_user
     end
 
     should "not find user record with incorrect confirmation token" do
@@ -177,7 +177,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     should "return user record and nil with correct email_confirmation token" do
       raw_token = @user.raw_confirmation_token
       loaded_user, error = User.load_from_email_confirmation_token_with_error(raw_token)
-      assert_equal @user.id, loaded_user.id
+      assert_equal @user, loaded_user
       assert_nil error
     end
 
@@ -207,7 +207,7 @@ class ConfirmableTest < ActiveSupport::TestCase
     should "return user record with correct email_confirmation token" do
       raw_token = @user.raw_confirmation_token
       loaded_user = User.load_from_email_confirmation_token(raw_token)
-      assert_equal @user.id, loaded_user.id
+      assert_equal @user, loaded_user
     end
 
     should "return nil with incorrect email_confirmation token" do
