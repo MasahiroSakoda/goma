@@ -13,6 +13,7 @@ module Goma
         end
 
         def add_options_to_migration
+          return unless options['migration']
           if path = self.class.migration_exists?('db/migrate', migration_file_name)
             gsub_file(path,
                       "t.integer :#{goma_config.failed_attempts_attribute_name}",

@@ -25,9 +25,9 @@ module Goma
           end
 
           def inject_index
-            # if path = self.class.migration_exists('db/migrate', migration_file_name)
-            if behavior == :invoke
-              insert_into_file("db/migrate/#{migration_number}_#{migration_file_name}.rb", goma_oauth_index, {after: /^\s{4,}end\s*\n/})
+            return unless options['migration']
+            if path = self.class.migration_exists?('db/migrate', migration_file_name)
+              insert_into_file(path, goma_oauth_index, {after: /^\s{4,}end\s*\n/})
             end
           end
 
