@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user_login, only: [:edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    not_authenticated unless current_user = @user
   end
 
   # POST /users
@@ -32,6 +34,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    not_authenticated unless current_user = @user
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
@@ -41,6 +44,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    not_authenticated unless current_user = @user
     @user.destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
   end

@@ -4,6 +4,7 @@ require_dependency "<%= namespaced_file_path %>/application_controller"
 <% end -%>
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
+  before_action <%= (singular_table_name == Goma.config.default_scope && !Helpers.include_scope_name_into_controller_name) ? ':require_login' : ":require_#{singular_table_name}_login" %>, only: [:edit, :update, :destroy]
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
 
   # GET <%= route_url %>
@@ -22,6 +23,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # GET <%= route_url %>/1/edit
   def edit
+    <%= goma_config.not_authenticated_action %> unless current_user = @user
   end
 
   # POST <%= route_url %>
@@ -42,6 +44,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # PATCH/PUT <%= route_url %>/1
   def update
+    <%= goma_config.not_authenticated_action %> unless current_user = @user
     if @<%= orm_instance.update("#{singular_table_name}_params") %>
       redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully updated.'" %>
     else
@@ -51,6 +54,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # DELETE <%= route_url %>/1
   def destroy
+    <%= goma_config.not_authenticated_action %> unless current_user = @user
     @<%= orm_instance.destroy %>
     redirect_to <%= index_helper %>_url, notice: <%= "'#{human_name} was successfully destroyed.'" %>
   end
