@@ -6,6 +6,7 @@ module Goma
   class Railtie < ::Rails::Railtie
     config.app_middleware.use Warden::Manager do |config|
       if Goma.config && Goma.config.modules.include?(:rememberable)
+        require 'goma/strategies/rememberable'
         config.default_strategies :rememberable
       end
     end
