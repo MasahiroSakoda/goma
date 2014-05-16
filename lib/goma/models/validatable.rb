@@ -41,16 +41,16 @@ module Goma
             def password_required?
               !@creating_with_omniauth && #{goma_config.oauth_association_name}.empty? && (
               !persisted? ||
-              !#{goma_config.password_attribute_name}.nil? ||
-              !#{goma_config.password_confirmation_attribute_name}.nil?)
+              #{goma_config.password_attribute_name}.present? ||
+              #{goma_config.password_confirmation_attribute_name}.present?)
             end
             RUBY
           else
             class_eval <<-RUBY, __FILE__, __LINE__ + 1
             def password_required?
               !persisted? ||
-              !#{goma_config.password_attribute_name}.nil? ||
-              !#{goma_config.password_confirmation_attribute_name}.nil?
+              #{goma_config.password_attribute_name}.present? ||
+              #{goma_config.password_confirmation_attribute_name}.present?
             end
             RUBY
           end

@@ -7,19 +7,15 @@ RailsApp::Application.routes.draw do
   resources :passwords, only: [:new, :create, :edit, :update]
 
   resources :confirmations, only: [:show, :new, :create] do
-    get :email,  on: :member
+    get :email, on: :member
   end
+
 
   resource :session, only: [:new, :create, :destroy]
 
   resources :users
 
   resources :unlocks, only: [:show, :new, :create,]
-
-  resources :confirmations, only: [:new, :create] do
-    get :activate, on: :member
-    get :confirm,  on: :member
-  end
 
   root to: 'home#index'
 

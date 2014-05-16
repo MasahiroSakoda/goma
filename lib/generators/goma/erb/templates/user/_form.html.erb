@@ -37,6 +37,6 @@
   </div>
 <% end -%>
   <div class="actions">
-    <%%= f.submit %>
+    <%%= f.submit ( @<%= singular_table_name %>.try(:persisted?) ? 'Update' : 'Sign up' ) %>
   </div>
 <%% end %>

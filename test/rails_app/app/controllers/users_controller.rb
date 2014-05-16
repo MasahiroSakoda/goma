@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to new_session_url, notice: "You have signed up successfully. However, we could not sign you in because your account is not yet activated. You will receive an email with instructions about how to activate your account in a few minutes."
     else
-      render :new
+      update_email or render :new
     end
   end
 
@@ -36,7 +36,10 @@ class UsersController < ApplicationController
   def update
     not_authenticated unless current_user = @user
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      flash[:notice] = @user.raw_confirmation_token ?
+                       'You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirmation link to finalize confirming your new email address.' :
+                       'You updated your account successfully'
+      redirect_to @user
     else
       render :edit
     end
@@ -58,5 +61,21 @@ class UsersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    end
+
+    def update_email
+      @user = User.find_by(username: params[:user][:username])
+      if @user.activated?
+        return false
+      end
+
+      if ( Time.now <= @user.confirmation_token_sent_at + 259200 ) &&
+        !@user.valid_password?(params[:user][:password])
+        flash[:alert] = 'This username was already registered. If you want to change your email address, please make sure you entered correct password.'
+        return false
+      end
+
+      @user.resend_activation_needed_email(to: params[:user][:email])
+      redirect_to new_session_url
     end
 end

@@ -13,8 +13,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # POST <%= route_url %>
   def create
     @<%= resource_name %> = <%= resource_class_name %>.find_by_identifier(params[:<%= goma_config.authentication_keys.to_field_name %>])
-    @<%= resource_name %>.generate_confirmation_token
-    @<%= resource_name %>.send_activation_needed_email
+    @<%= resource_name %>.resend_activation_needed_email
 
     redirect_to <%= login_url %>, notice: "We are processing your request. You will receive new activation email in a few minutes."
   end
@@ -44,14 +43,19 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     if @<%= resource_name %>
       @<%= resource_name %>.confirm_email!
-      redirect_to edit_<%= resource_name %>_url, notice: 'Your new email was successfully confirmed.'
+      redirect_to root_url, notice: 'Your new email was successfully confirmed.'
     else
       if err == :token_expired
         flash.now[:alert] = "Your email confirmation URL has expired, please change your email again."
       else
         flash.now[:alert] = "Email confirmation failed. Please make sure you used the full URL provided."
       end
-      render edit_<%= resource_name%>_url(current_<%= resource_name %>)
+
+      if current_<%= resource_name %>
+        render edit_<%= resource_name%>_url(current_<%= resource_name %>)
+      else
+        render root_url
+      end
     end
   end
 end

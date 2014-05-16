@@ -1,5 +1,9 @@
 <h1>New <%= singular_table_name %></h1>
 
 <%%= render 'form' %>
+<% auth_keys = goma_config.authentication_keys - [goma_config.email_attribute_name] -%>
+<% if goma_config.modules.include?(:confirmable) && auth_keys.present? -%>
+  * If you signed up with wrong email address, please enter correct email address and <%= auth_keys.join(', ') %> and password your entered when you signed up and click 'Sign up' again.
+<% end -%>
 
 <%%= link_to 'Back', <%= index_helper %>_path %>

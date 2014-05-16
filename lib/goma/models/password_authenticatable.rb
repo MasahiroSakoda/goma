@@ -5,10 +5,11 @@ module Goma
 
       included do
         password_attr = goma_config.password_attribute_name
-        attr_reader password_attr, "current_#{password_attr}"
+        attr_reader password_attr
 
         class_eval <<-METHOD, __FILE__, __LINE__ + 1
         def #{password_attr}=(new_#{password_attr})
+          return if new_#{password_attr}.blank?
           @#{password_attr} = new_#{password_attr}
           self.#{Goma.config.encrypted_password_attribute_name} = encrypt_password(new_#{password_attr})
         end

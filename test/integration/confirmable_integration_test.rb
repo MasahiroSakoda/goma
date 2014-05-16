@@ -162,6 +162,7 @@ class ConfirmableIntegrationTest < ActionDispatch::IntegrationTest
     assert_difference 'ActionMailer::Base.deliveries.size', 1 do
       click_button 'Update'
     end
+    assert_match /but we need to verify your new email address/, _flash[:notice]
 
     email = ActionMailer::Base.deliveries.last
     assert_match %r{/confirmations/sesame/email}, email.body.encoded

@@ -8,8 +8,7 @@ class ConfirmationsController < ApplicationController
   # POST /confirmations
   def create
     @user = User.find_by_identifier(params[:username_or_email])
-    @user.generate_confirmation_token
-    @user.send_activation_needed_email
+    @user.resend_activation_needed_email
 
     redirect_to new_session_url, notice: "We are processing your request. You will receive new activation email in a few minutes."
   end
@@ -39,14 +38,19 @@ class ConfirmationsController < ApplicationController
 
     if @user
       @user.confirm_email!
-      redirect_to edit_user_url, notice: 'Your new email was successfully confirmed.'
+      redirect_to root_url, notice: 'Your new email was successfully confirmed.'
     else
       if err == :token_expired
         flash.now[:alert] = "Your email confirmation URL has expired, please change your email again."
       else
         flash.now[:alert] = "Email confirmation failed. Please make sure you used the full URL provided."
       end
-      render edit_user_url(current_user)
+
+      if current_user
+        render edit_user_url(current_user)
+      else
+        render root_url
+      end
     end
   end
 end

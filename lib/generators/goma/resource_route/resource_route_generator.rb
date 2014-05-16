@@ -67,11 +67,11 @@ module Goma
       def appending_string
         if options[:controller_type] == 'confirmation' &&
           goma_config.modules.include?(:confirmable) && goma_config.email_confirmation_enabled
-          strings = []
-          strings << ' do'
-          strings << '  get :email,  on: :member'
-          strings << 'end'
-          strings.join("\n")
+          <<-BLOCK.strip_heredoc
+           do
+            get :email, on: :member
+          end
+          BLOCK
         elsif options[:controller_type] == 'oauth'
           "\nget '/auth/:provider/callback', to: '#{file_name.pluralize}#create'"
         end

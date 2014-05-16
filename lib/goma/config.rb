@@ -134,6 +134,10 @@ module Goma
     config_accessor(:oauth_uid_attribute_name)                     { :uid }
 
 
+    def password_confirmation_attribute_name
+      @password_confirmation_attribute_name ||= "#{password_attribute_name}_confirmation".to_sym
+    end
+
     self.instance_methods(false).grep(/attribute_name$/).each do |conf_name|
       name = conf_name.to_s[0...-15]
 
@@ -151,10 +155,6 @@ module Goma
         @#{name}_was_getter ||= "\#{#{name}_getter}_was".to_sym
       end
       RUBY
-    end
-
-    def password_confirmation_attribute_name
-      @password_confirmation_attribute_name ||= "#{password_attribute_name}_confirmation".to_sym
     end
 
     def oauth_association_name

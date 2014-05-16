@@ -91,6 +91,18 @@ module Goma
         goma_config.email_confirmation_success_email_method_name && !@skip_email_confirmation_success_email
       end
 
+      def resend_activation_needed_email(to: nil)
+        if to
+          @skip_email_confirmation = true
+          self.send(goma_config.email_setter, to)
+          return false unless self.save
+          @skip_email_confirmation = false
+        end
+        setup_activation
+        save(validate: false)
+        send_activation_needed_email
+      end
+
       DefinitionHelper.define_token_generator_method_for(self, :confirmation)
 
       protected
