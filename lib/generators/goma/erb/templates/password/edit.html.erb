@@ -1,7 +1,7 @@
 <h1>Change your password</h1>
 
-<%%= form_for(@<%= resource_name %>) do |f| %>
-  <%% if @<%= resource_name %>.errors.any? %>
+<%%= form_for(@<%= resource_name %>, url: <%= singular_table_name %>_url, html: {method: :put}) do |f| %>
+  <%% if @<%= resource_name %> && @<%= resource_name %>.errors.any? %>
     <div id="error_explanation">
       <h2><%%= pluralize(@<%= resource_name %>.errors.count, "error") %> prohibited this <%= resource_name %> from being saved:</h2>
 
@@ -12,7 +12,7 @@
       </ul>
     </div>
   <%% end %>
-    <%%= f.hidden_field :reset_password_token %>
+  <%%= f.hidden_field :<%= goma_config.reset_password_token_to_send_attribute_name %> %>
   <div class="field">
     <%%= f.label :<%= goma_config.password_attribute_name %> %><br>
     <%%= f.password_field :<%= goma_config.password_attribute_name %> %>
@@ -22,6 +22,6 @@
     <%%= f.password_field :<%= goma_config.password_attribute_name %>_confirmation %>
   </div>
   <div class="actions">
-    <%%= f.submit %>
+    <%%= f.submit 'Change my password' %>
   </div>
 <%% end %>

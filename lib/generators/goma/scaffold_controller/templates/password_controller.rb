@@ -21,16 +21,17 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # GET <%= route_url %>/1/edit
   def edit
-    @reset_password_token = params[:id]
+    @<%= resource_name %> = <%= resource_class_name %>.new
+    @<%= resource_name %>.<%= goma_config.reset_password_token_to_send_attribute_name %> = params[:id]
   end
 
   # PATCH/PUT <%= route_url %>/1
   def update
-    @<%= resource_name %>, err = <%= resource_class_name %>.load_from_reset_password_token_with_error(params[:id])
+    @<%= resource_name %>, err = <%= resource_class_name %>.load_from_reset_password_token_with_error(params[:<%= resource_name %>][:<%= goma_config.reset_password_token_to_send_attribute_name %>])
 
     if @<%= resource_name %>
       @<%= resource_name %>.unlock_access! if @<%= resource_name %>.lockable? && @<%= resource_name %>.access_locked?
-      @<%= resource_name %>.change_password!(params[:<%= goma_config.password_attribute_name %>], params[:<%= goma_config.password_attribute_name %>_confirmation])
+      @<%= resource_name %>.change_password!(params[:<%= resource_name %>][:<%= goma_config.password_attribute_name %>], params[:<%= resource_name %>][:<%= goma_config.password_attribute_name %>_confirmation])
       force_login(@<%= resource_name %>)
       <%= specify_scope_if_needed %>redirect_back_or_to root_url, notice: 'Your password was changed successfully. You are now logged in.'
     else
@@ -38,10 +39,14 @@ class <%= controller_class_name %>Controller < ApplicationController
         flash.now[:alert] = "The password reset URL you visited has expired, please request a new one."
         render :new
       else
-        flash.now[:alert] = "You can't access this page without comming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
+        @<%= resource_name %> = <%= resource_class_name %>.new
+        flash.now[:alert] = "You can't change your password in this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
         render :edit
       end
     end
+  rescue ActiveRecord::RecordInvalid
+    @<%= resource_name %>.<%= goma_config.reset_password_token_to_send_attribute_name %> = params[:<%= resource_name %>][:<%= goma_config.reset_password_token_to_send_attribute_name %>]
+    render :edit
   end
 end
 <% end -%>

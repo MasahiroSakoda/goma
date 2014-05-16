@@ -1,18 +1,18 @@
 <h1>Change your password</h1>
 
-<%= form_for(@password) do |f| %>
-  <% if @password.errors.any? %>
+<%= form_for(@user, url: password_url, html: {method: :put}) do |f| %>
+  <% if @user && @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@password.errors.count, "error") %> prohibited this password from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
-      <% @password.errors.full_messages.each do |msg| %>
+      <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-
+  <%= f.hidden_field :raw_reset_password_token %>
   <div class="field">
     <%= f.label :password %><br>
     <%= f.password_field :password %>
@@ -22,6 +22,6 @@
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Change my password' %>
   </div>
 <% end %>
