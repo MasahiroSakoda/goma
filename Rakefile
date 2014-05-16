@@ -31,15 +31,17 @@ end
 
 desc "Rebuild test app's resources"
 task "rebuild_test_app" do
+  migration = 'migrate' == ARGV.last ? '' : ' --no-migration'
   cd "test/rails_app"
-  sh "bundle exec rails d goma:scaffold User"
-  sh "bundle exec rails g goma:scaffold User"
-  sh "RAILS_ENV=test bundle exec rake db:drop"
-  sh "RAILS_ENV=test bundle exec rake db:create"
-  sh "RAILS_ENV=test bundle exec rake db:migrate"
+  sh "bundle exec rails d goma:scaffold User#{migration}"
+  sh "bundle exec rails g goma:scaffold User#{migration}"
+  if migration.empty?
+    sh "RAILS_ENV=test bundle exec rake db:drop"
+    sh "RAILS_ENV=test bundle exec rake db:create"
+    sh "RAILS_ENV=test bundle exec rake db:migrate"
+  end
   sh "rm -rf test/*"
   cd "../.."
 end
-
 
 task default: :test
