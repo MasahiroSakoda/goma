@@ -34,10 +34,10 @@ module Goma
         # You don't have to call this method directly.
         # This method is called from the modules defined under {Goma::Models}
         # @return [Object, Symbol] Object load from the token and nil or, if it failed, nil and a symbol which indicates reason
-        def load_from_token_with_error(raw_token, token_attr, token_sent_at_attr, valid_period)
+        def load_from_token_with_error(raw_token, token_attr, token_sent_at_attr, valid_period=nil)
           token = Goma.token_generator.digest(token_attr, raw_token)
           if record = self.find_by(token_attr => token)
-            if Time.new.utc - record.send(token_sent_at_attr) <= valid_period
+            if valid_period.nil? || (Time.new.utc - record.send(token_sent_at_attr) <= valid_period)
               [record, nil]
             else
               [nil, :token_expired]
@@ -77,14 +77,25 @@ module Goma
     class << self
       # class methods
 
-      def define_load_from_token_with_error_method_for(target, purpose)
-        target.module_eval <<-METHOD, __FILE__, __LINE__ + 1
-        def load_from_#{purpose}_token_with_error(raw_token, valid_period)
-          token_attr = goma_config.#{purpose}_token_attribute_name
-          token_sent_at_attr = goma_config.#{purpose}_token_sent_at_attribute_name
-          load_from_token_with_error(raw_token, token_attr, token_sent_at_attr, valid_period)
+      def define_load_from_token_with_error_method_for(target, name, valid_period_config=nil, purpose=name)
+        if valid_period_config
+          target.module_eval <<-METHOD, __FILE__, __LINE__ + 1
+          def load_from_#{purpose}_token_with_error(raw_token)
+            token_attr         = goma_config.#{name}_token_attribute_name
+            token_sent_at_attr = goma_config.#{name}_token_sent_at_attribute_name
+            valid_period       = goma_config.#{valid_period_config}
+            load_from_token_with_error(raw_token, token_attr, token_sent_at_attr, valid_period)
+          end
+          METHOD
+        else
+          target.module_eval <<-METHOD, __FILE__, __LINE__ + 1
+          def load_from_#{purpose}_token_with_error(raw_token)
+            token_attr         = goma_config.#{name}_token_attribute_name
+            token_sent_at_attr = goma_config.#{name}_token_sent_at_attribute_name
+            load_from_token_with_error(raw_token, token_attr, token_sent_at_attr)
+          end
+          METHOD
         end
-        METHOD
       end
 
       def define_load_from_token_methods_for(target, purpose)

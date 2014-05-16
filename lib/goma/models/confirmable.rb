@@ -14,17 +14,11 @@ module Goma
 
       # @!parse extend ClassMethods
       module ClassMethods
-        DefinitionHelper.define_load_from_token_with_error_method_for(self, :confirmation)
-
-        def load_from_activation_token_with_error(raw_token)
-          load_from_confirmation_token_with_error(raw_token, goma_config.activate_within)
-        end
-
-        def load_from_email_confirmation_token_with_error(raw_token)
-          load_from_confirmation_token_with_error(raw_token, goma_config.confirm_email_within)
-        end
-
+        DefinitionHelper.define_load_from_token_with_error_method_for(self, :confirmation, :activate_within, :activation)
         DefinitionHelper.define_load_from_token_methods_for(self, :activation)
+
+        DefinitionHelper.define_load_from_token_with_error_method_for(self, :confirmation, :confirm_email_within, :email_confirmation)
+
         DefinitionHelper.define_load_from_token_methods_for(self, :email_confirmation)
       end
 

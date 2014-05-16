@@ -8,7 +8,7 @@ module Goma
       end
 
       module ClassMethods
-        DefinitionHelper.define_load_from_token_with_error_method_for(self, :reset_password)
+        DefinitionHelper.define_load_from_token_with_error_method_for(self, :reset_password, :reset_password_within)
         DefinitionHelper.define_load_from_token_methods_for(self, :reset_password)
       end
 
