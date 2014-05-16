@@ -42,8 +42,11 @@ module Goma
       end
 
       def resource_definition
-        if options[:controller_type] == 'session'
+        case options[:controller_type]
+        when 'session'
           "resource :#{file_name.singularize}"
+        when 'oauth'
+          ''
         else
           "resources :#{file_name.pluralize}"
         end
@@ -57,8 +60,6 @@ module Goma
           ', only: [:show, :new, :create]'
         when 'password'
           ', only: [:new, :create, :edit, :update]'
-        when 'oauth'
-          ', only: [:create]'
         else
           ''
         end
@@ -73,7 +74,10 @@ module Goma
           end
           BLOCK
         elsif options[:controller_type] == 'oauth'
-          "\nget '/auth/:provider/callback', to: '#{file_name.pluralize}#create'"
+          <<-RUBY.strip_heredoc
+          get '/auth/:provider/callback', to: '#{file_name.pluralize}#create'
+          get '/auth/failure', to: '#{file_name.pluralize}#failure'
+          RUBY
         end
       end
     end

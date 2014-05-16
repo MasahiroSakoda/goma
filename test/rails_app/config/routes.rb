@@ -1,6 +1,8 @@
 RailsApp::Application.routes.draw do
-  resources :authentications, only: [:create]
+
   get '/auth/:provider/callback', to: 'authentications#create'
+  get '/auth/failure', to: 'authentications#failure'
+
 
   resources :unlocks, only: [:show, :new, :create]
 

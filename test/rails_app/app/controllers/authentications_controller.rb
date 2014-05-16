@@ -12,4 +12,9 @@ class AuthenticationsController < ApplicationController
     force_login(user)
     redirect_back_or_to root_url, notice: "Successfully authenticated from #{omniauth[:provider]} account."
   end
+
+  def failure
+    flash[:alert] = "Could not authenticate you from #{params[:strategy].capitalize} because \"#{params[:message].humanize}\"."
+    redirect_to new_session_url
+  end
 end
