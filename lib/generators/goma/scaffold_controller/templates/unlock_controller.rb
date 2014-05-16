@@ -9,6 +9,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def show
     @<%= resource_name %>, err = <%= resource_class_name %>.load_from_unlock_token_with_error(params[:id])
     if @<%= resource_name %>
+      @<%= resource_name %>.unlock_access!
       flash[:notice] = "Your account has been unlocked successfully. Please continue to login."
       redirect_to <%= login_url %>
     else

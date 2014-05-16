@@ -3,7 +3,7 @@
 <%%= form_tag(<%= name.underscore.pluralize%>_url, method: :post) do %>
   <div class="field">
     <%%= label_tag :<%= goma_config.authentication_keys.to_field_name %> %><br>
-    <%%= text_field_tag :<%= goma_config.authentication_keys.to_field_name %>
+    <%%= text_field_tag :<%= goma_config.authentication_keys.to_field_name %> %>
   </div>
   <div class="actions">
     <%%= submit_tag "Resend unlock instructions" %>

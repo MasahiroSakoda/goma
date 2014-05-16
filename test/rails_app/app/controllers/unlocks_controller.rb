@@ -4,6 +4,7 @@ class UnlocksController < ApplicationController
   def show
     @user, err = User.load_from_unlock_token_with_error(params[:id])
     if @user
+      @user.unlock_access!
       flash[:notice] = "Your account has been unlocked successfully. Please continue to login."
       redirect_to new_session_url
     else

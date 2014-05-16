@@ -15,8 +15,6 @@ RailsApp::Application.routes.draw do
 
   resources :users
 
-  resources :unlocks, only: [:show, :new, :create,]
-
   root to: 'home#index'
 
   get 'login' => 'sessions#new', as: :login
