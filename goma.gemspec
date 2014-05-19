@@ -49,6 +49,11 @@ That's it.
 This gem is in early development phase and I do not recommend you to use this for production for a while.
 Bug reports and pull requests are welcome.
 
+I am surprised that this gem has been downloaded over 200 times, in spite of pre release versions of v0.0.1.
+And, I feel bad about there were lots of bugs and incomplete implementations in previous versions.
+
+I will release this as a release candidate, but will add lots of code before v0.0.1.
+
 Enjoy!\e[0m
 MESSAGE
 

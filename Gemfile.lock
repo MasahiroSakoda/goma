@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    goma (0.0.1.gamma)
+    goma (0.0.1.rc1)
       rails (~> 4.0)
       warden
 
